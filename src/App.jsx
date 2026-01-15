@@ -48,6 +48,7 @@ function App() {
                                 { href: '#home', label: 'Home' },
                                 { href: '#profil', label: 'Profil' },
                                 { href: '#proker', label: 'Proker' },
+                                { href: '#galeri', label: 'Galeri' },
                                 { href: '#sosmed', label: 'Sosmed' }
                             ].map((link) => (
                                 <a
@@ -91,6 +92,7 @@ function App() {
                                 { href: '#home', label: 'Home' },
                                 { href: '#profil', label: 'Profil' },
                                 { href: '#proker', label: 'Proker' },
+                                { href: '#galeri', label: 'Galeri' },
                                 { href: '#sosmed', label: 'Sosmed' }
                             ].map((link, index) => (
                                 <a
@@ -267,6 +269,106 @@ function App() {
                                     <p className="text-slate-300 leading-relaxed">
                                         Forum diskusi dan kajian untuk meningkatkan wawasan mahasiswa tentang isu-isu terkini, akademik, dan sosial kemasyarakatan.
                                     </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Gallery Section - Dokumentasi Kegiatan */}
+            <section id="galeri" className="py-20 px-4 relative z-10">
+                <div className="max-w-7xl mx-auto">
+                    <h2 className="text-4xl md:text-5xl font-black text-center mb-4">
+                        <span className="gradient-text">Galeri Kegiatan</span>
+                    </h2>
+                    <p className="text-center text-slate-400 mb-12 max-w-2xl mx-auto">
+                        Dokumentasi aktivitas dan program kerja BEM UNWAHA
+                    </p>
+
+                    {/* Gallery Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {/* Gallery Item 1 - Large */}
+                        <div className="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-2xl glass-card border-2 border-dark-border/50 hover:border-blue-primary/50 transition-all duration-300">
+                            <div className="aspect-[16/9] md:aspect-[16/10] bg-gradient-to-br from-blue-primary/20 to-cyan-accent/20 overflow-hidden">
+                                <img
+                                    src="/gambar2.JPG"
+                                    alt="Kegiatan BEM UNWAHA"
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                />
+                            </div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="absolute bottom-0 left-0 right-0 p-6">
+                                    <h3 className="text-xl font-bold text-white mb-2">Gema Sholawat 2025</h3>
+                                    <p className="text-slate-300 text-sm">Kegiatan rutin pembacaan sholawat bersama</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Gallery Item 2 */}
+                        <div className="group relative overflow-hidden rounded-2xl glass-card border-2 border-dark-border/50 hover:border-blue-primary/50 transition-all duration-300">
+                            <div className="aspect-square bg-gradient-to-br from-cyan-accent/20 to-blue-500/20 overflow-hidden">
+                                <img
+                                    src="/gambar6.JPG"
+                                    alt="Kegiatan BEM UNWAHA"
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                />
+                            </div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="absolute bottom-0 left-0 right-0 p-4">
+                                    <h3 className="text-lg font-bold text-white mb-1">LDKM 2025</h3>
+                                    <p className="text-slate-300 text-xs">Pelatihan kepemimpinan</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Gallery Item 3 */}
+                        <div className="group relative overflow-hidden rounded-2xl glass-card border-2 border-dark-border/50 hover:border-blue-primary/50 transition-all duration-300">
+                            <div className="aspect-square bg-gradient-to-br from-purple-500/20 to-pink-500/20 overflow-hidden">
+                                <img
+                                    src="/gambar3.JPG"
+                                    alt="Kegiatan BEM UNWAHA"
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                />
+                            </div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="absolute bottom-0 left-0 right-0 p-4">
+                                    <h3 className="text-lg font-bold text-white mb-1">BEM Mengabdi</h3>
+                                    <p className="text-slate-300 text-xs">Pengabdian masyarakat</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Gallery Item 4 */}
+                        <div className="md:col-span-2 group relative overflow-hidden rounded-2xl glass-card border-2 border-dark-border/50 hover:border-blue-primary/50 transition-all duration-300">
+                            <div className="aspect-[21/9] bg-gradient-to-br from-blue-500/20 to-cyan-accent/20 overflow-hidden">
+                                <img
+                                    src="/gambar4.JPG"
+                                    alt="Kegiatan BEM UNWAHA"
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                />
+                            </div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="absolute bottom-0 left-0 right-0 p-6">
+                                    <h3 className="text-xl font-bold text-white mb-2">Kajian Ilmiah & Diskusi</h3>
+                                    <p className="text-slate-300 text-sm">Forum diskusi mahasiswa</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Gallery Item 5 */}
+                        <div className="group relative overflow-hidden rounded-2xl glass-card border-2 border-dark-border/50 hover:border-blue-primary/50 transition-all duration-300">
+                            <div className="aspect-square bg-gradient-to-br from-green-500/20 to-emerald-500/20 overflow-hidden">
+                                <img
+                                    src="/gambar5.JPG"
+                                    alt="Kegiatan BEM UNWAHA"
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                />
+                            </div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="absolute bottom-0 left-0 right-0 p-4">
+                                    <h3 className="text-lg font-bold text-white mb-1">Kompetisi Mahasiswa</h3>
+                                    <p className="text-slate-300 text-xs">Event tahunan</p>
                                 </div>
                             </div>
                         </div>
