@@ -116,8 +116,102 @@ function App() {
             <section id="home" className="relative min-h-screen flex items-center justify-center pt-16 px-4">
                 <div className="max-w-5xl mx-auto text-center relative z-10">
                     <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
-                        BEM UNWAHA: <br />
-                        <span className="gradient-text">Kabinet Sinergi Perubahan</span>
+                        BEM UNWAHA <br />
+                        <span
+                            className="relative inline-block py-4 cursor-pointer group"
+                            onMouseMove={(e) => {
+                                const rect = e.currentTarget.getBoundingClientRect();
+                                const x = e.clientX - rect.left;
+                                const y = e.clientY - rect.top;
+                                e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+                                e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+                            }}
+                        >
+                            {/* Subtle Base Glow */}
+                            <span className="absolute inset-0 blur-[40px] bg-gradient-to-r from-blue-600/15 via-cyan-500/20 to-blue-600/15 scale-110"></span>
+
+                            {/* Primary Spotlight - Follows Mouse Smoothly */}
+                            <span
+                                className="absolute w-80 h-80 rounded-full blur-[100px] bg-blue-500/25 pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"
+                                style={{
+                                    left: 'var(--mouse-x, 50%)',
+                                    top: 'var(--mouse-y, 50%)',
+                                    transform: 'translate(-50%, -50%)',
+                                    transition: 'left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), top 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease-out'
+                                }}
+                            ></span>
+
+                            {/* Secondary Spotlight - Faster, Smoother */}
+                            <span
+                                className="absolute w-48 h-48 rounded-full blur-[60px] bg-cyan-400/30 pointer-events-none opacity-0 group-hover:opacity-100"
+                                style={{
+                                    left: 'var(--mouse-x, 50%)',
+                                    top: 'var(--mouse-y, 50%)',
+                                    transform: 'translate(-50%, -50%)',
+                                    transition: 'left 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease-out'
+                                }}
+                            ></span>
+
+                            {/* Animated Ring 1 - Smooth Expansion */}
+                            <span
+                                className="absolute w-32 h-32 rounded-full border-2 border-blue-400/20 pointer-events-none opacity-0 group-hover:opacity-100 group-hover:scale-150"
+                                style={{
+                                    left: 'var(--mouse-x, 50%)',
+                                    top: 'var(--mouse-y, 50%)',
+                                    transform: 'translate(-50%, -50%)',
+                                    transition: 'left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out, transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                                }}
+                            ></span>
+
+                            {/* Animated Ring 2 - Slower, Smoother Expansion */}
+                            <span
+                                className="absolute w-24 h-24 rounded-full border border-cyan-300/30 pointer-events-none opacity-0 group-hover:opacity-100 group-hover:scale-[2]"
+                                style={{
+                                    left: 'var(--mouse-x, 50%)',
+                                    top: 'var(--mouse-y, 50%)',
+                                    transform: 'translate(-50%, -50%)',
+                                    transition: 'left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease-out, transform 1s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                                }}
+                            ></span>
+
+                            {/* Particle Effect 1 - Smooth Float */}
+                            <span
+                                className="absolute w-3 h-3 rounded-full bg-blue-400/40 blur-sm pointer-events-none opacity-0 group-hover:opacity-100"
+                                style={{
+                                    left: 'var(--mouse-x, 50%)',
+                                    top: 'var(--mouse-y, 50%)',
+                                    transform: 'translate(-50%, -50%) translate(-20px, -20px)',
+                                    transition: 'left 0.15s ease-out, top 0.15s ease-out, opacity 0.2s ease-out'
+                                }}
+                            ></span>
+
+                            {/* Particle Effect 2 - Smooth Float */}
+                            <span
+                                className="absolute w-2 h-2 rounded-full bg-cyan-300/50 blur-sm pointer-events-none opacity-0 group-hover:opacity-100"
+                                style={{
+                                    left: 'var(--mouse-x, 50%)',
+                                    top: 'var(--mouse-y, 50%)',
+                                    transform: 'translate(-50%, -50%) translate(25px, -15px)',
+                                    transition: 'left 0.2s ease-out, top 0.2s ease-out, opacity 0.3s ease-out'
+                                }}
+                            ></span>
+
+                            {/* Particle Effect 3 - Smooth Float */}
+                            <span
+                                className="absolute w-2 h-2 rounded-full bg-blue-300/40 blur-sm pointer-events-none opacity-0 group-hover:opacity-100"
+                                style={{
+                                    left: 'var(--mouse-x, 50%)',
+                                    top: 'var(--mouse-y, 50%)',
+                                    transform: 'translate(-50%, -50%) translate(-15px, 20px)',
+                                    transition: 'left 0.25s ease-out, top 0.25s ease-out, opacity 0.4s ease-out'
+                                }}
+                            ></span>
+
+                            {/* Gradient Text with subtle shadow */}
+                            <span className="gradient-text relative drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                                Kabinet Sinergi Perubahan
+                            </span>
+                        </span>
                     </h1>
                     <p className="text-xl md:text-2xl text-slate-400 mb-8 max-w-3xl mx-auto font-light">
                         Membangun ekosistem mahasiswa yang inovatif, aspiratif, dan berdampak nyata untuk kemajuan kampus dan masyarakat
