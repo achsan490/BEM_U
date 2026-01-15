@@ -1,14 +1,48 @@
 import { Instagram, Youtube, Music, MessageCircle, CheckCircle, Sparkles, Users, Heart, BookOpen, Award, Target, Lightbulb, Menu, X } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+
+// Custom hook for scroll-triggered animations
+function useInView(options = {}) {
+    const ref = useRef(null)
+    const [isInView, setIsInView] = useState(false)
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                setIsInView(true)
+                // Once animated, keep it visible
+                observer.unobserve(entry.target)
+            }
+        }, {
+            threshold: 0.1,
+            ...options
+        })
+
+        if (ref.current) {
+            observer.observe(ref.current)
+        }
+
+        return () => {
+            if (ref.current) {
+                observer.unobserve(ref.current)
+            }
+        }
+    }, [])
+
+    return [ref, isInView]
+}
 
 function App() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [scrolled, setScrolled] = useState(false)
+    const [scrollY, setScrollY] = useState(0)
 
-    // Detect scroll for navbar effect
+    // Detect scroll for navbar effect and parallax
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 20)
+            const currentScrollY = window.scrollY
+            setScrolled(currentScrollY > 20)
+            setScrollY(currentScrollY)
         }
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
@@ -16,11 +50,20 @@ function App() {
 
     return (
         <div className="min-h-screen bg-dark-bg text-slate-100 overflow-x-hidden">
-            {/* Mesh Gradient Background Effects */}
+            {/* Mesh Gradient Background Effects with Parallax */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-glow opacity-30 blur-3xl"></div>
-                <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-cyan-glow opacity-20 blur-3xl"></div>
-                <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-blue-glow opacity-25 blur-3xl"></div>
+                <div
+                    className="absolute top-0 left-1/4 w-96 h-96 bg-blue-glow opacity-30 blur-3xl"
+                    style={{ transform: `translateY(${scrollY * 0.5}px)` }}
+                ></div>
+                <div
+                    className="absolute top-1/3 right-1/4 w-96 h-96 bg-cyan-glow opacity-20 blur-3xl"
+                    style={{ transform: `translateY(${scrollY * 0.3}px)` }}
+                ></div>
+                <div
+                    className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-blue-glow opacity-25 blur-3xl"
+                    style={{ transform: `translateY(${scrollY * 0.4}px)` }}
+                ></div>
             </div>
 
             {/* Premium Glassmorphism Navbar */}
@@ -84,8 +127,12 @@ function App() {
 
                     {/* Mobile Menu with Slide Animation */}
                     <div
-                        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+                        className={`md:hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                             }`}
+                        style={{
+                            overflowY: mobileMenuOpen ? 'auto' : 'hidden',
+                            overflowX: 'hidden'
+                        }}
                     >
                         <div className="py-4 space-y-1">
                             {[
@@ -114,7 +161,10 @@ function App() {
 
             {/* Hero Section */}
             <section id="home" className="relative min-h-screen flex items-center justify-center pt-16 px-4">
-                <div className="max-w-5xl mx-auto text-center relative z-10">
+                <div
+                    className="max-w-5xl mx-auto text-center relative z-10"
+                    style={{ transform: `translateY(${scrollY * 0.15}px)` }}
+                >
                     <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
                         BEM UNWAHA <br />
                         <span
@@ -213,10 +263,16 @@ function App() {
                             </span>
                         </span>
                     </h1>
-                    <p className="text-xl md:text-2xl text-slate-400 mb-8 max-w-3xl mx-auto font-light">
+                    <p
+                        className="text-xl md:text-2xl text-slate-400 mb-8 max-w-3xl mx-auto font-light"
+                        style={{ transform: `translateY(${scrollY * 0.1}px)` }}
+                    >
                         Membangun ekosistem mahasiswa yang inovatif, aspiratif, dan berdampak nyata untuk kemajuan kampus dan masyarakat
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <div
+                        className="flex flex-col sm:flex-row gap-4 justify-center"
+                        style={{ transform: `translateY(${scrollY * 0.05}px)` }}
+                    >
                         <a
                             href="#proker"
                             className="px-8 py-4 bg-gradient-to-r from-blue-primary to-cyan-accent text-white font-semibold rounded-full hover:shadow-glow-blue transition-all duration-300 hover:scale-105"
@@ -242,13 +298,21 @@ function App() {
                             { number: '40+', label: 'Program Kerja', icon: Target },
                             { number: '150+', label: 'Pengurus', icon: Users },
                             { number: '5000+', label: 'Mahasiswa', icon: Sparkles },
-                        ].map((stat, index) => (
-                            <div key={index} className="glass-card p-6 text-center group hover:border-blue-primary/50 transition-all duration-300">
-                                <stat.icon className="w-8 h-8 mx-auto mb-3 text-blue-primary" />
-                                <div className="text-4xl md:text-5xl font-black gradient-text mb-2">{stat.number}</div>
-                                <div className="text-slate-400 text-sm md:text-base">{stat.label}</div>
-                            </div>
-                        ))}
+                        ].map((stat, index) => {
+                            const [ref, isInView] = useInView()
+                            return (
+                                <div
+                                    key={index}
+                                    ref={ref}
+                                    className={`glass-card p-6 text-center group hover:border-blue-primary/50 transition-all duration-300 ${isInView ? 'animate-fade-in-up' : 'opacity-0'}`}
+                                    style={{ animationDelay: `${index * 0.1}s` }}
+                                >
+                                    <stat.icon className="w-8 h-8 mx-auto mb-3 text-blue-primary" />
+                                    <div className="text-4xl md:text-5xl font-black gradient-text mb-2">{stat.number}</div>
+                                    <div className="text-slate-400 text-sm md:text-base">{stat.label}</div>
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
             </section>
@@ -265,40 +329,56 @@ function App() {
 
                     <div className="grid md:grid-cols-2 gap-8">
                         {/* Visi Card */}
-                        <div className="glass-card p-8 group hover:border-blue-primary/50 transition-all duration-300">
-                            <div className="flex items-center gap-3 mb-6">
-                                <div className="w-12 h-12 rounded-full bg-blue-primary/20 flex items-center justify-center">
-                                    <Lightbulb className="w-6 h-6 text-blue-primary" />
+                        {(() => {
+                            const [ref, isInView] = useInView()
+                            return (
+                                <div
+                                    ref={ref}
+                                    className={`glass-card p-8 group hover:border-blue-primary/50 transition-all duration-300 ${isInView ? 'animate-fade-in-left' : 'opacity-0'}`}
+                                >
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <div className="w-12 h-12 rounded-full bg-blue-primary/20 flex items-center justify-center">
+                                            <Lightbulb className="w-6 h-6 text-blue-primary" />
+                                        </div>
+                                        <h3 className="text-2xl font-bold">Visi</h3>
+                                    </div>
+                                    <p className="text-slate-300 leading-relaxed">
+                                        Mewujudkan BEM UNWAHA sebagai organisasi mahasiswa yang inovatif, aspiratif, dan religius dalam mengembangkan potensi mahasiswa serta berkontribusi nyata bagi kampus dan masyarakat.
+                                    </p>
                                 </div>
-                                <h3 className="text-2xl font-bold">Visi</h3>
-                            </div>
-                            <p className="text-slate-300 leading-relaxed">
-                                Mewujudkan BEM UNWAHA sebagai organisasi mahasiswa yang inovatif, aspiratif, dan religius dalam mengembangkan potensi mahasiswa serta berkontribusi nyata bagi kampus dan masyarakat.
-                            </p>
-                        </div>
+                            )
+                        })()}
 
                         {/* Misi Card */}
-                        <div className="glass-card p-8 group hover:border-blue-primary/50 transition-all duration-300">
-                            <div className="flex items-center gap-3 mb-6">
-                                <div className="w-12 h-12 rounded-full bg-cyan-accent/20 flex items-center justify-center">
-                                    <Target className="w-6 h-6 text-cyan-accent" />
+                        {(() => {
+                            const [ref, isInView] = useInView()
+                            return (
+                                <div
+                                    ref={ref}
+                                    className={`glass-card p-8 group hover:border-blue-primary/50 transition-all duration-300 ${isInView ? 'animate-fade-in-right' : 'opacity-0'}`}
+                                >
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <div className="w-12 h-12 rounded-full bg-cyan-accent/20 flex items-center justify-center">
+                                            <Target className="w-6 h-6 text-cyan-accent" />
+                                        </div>
+                                        <h3 className="text-2xl font-bold">Misi</h3>
+                                    </div>
+                                    <ul className="space-y-3">
+                                        {[
+                                            'Menyelenggarakan program kerja yang inovatif dan bermanfaat',
+                                            'Menjadi wadah aspirasi mahasiswa yang responsif dan solutif',
+                                            'Memperkuat nilai-nilai keislaman dalam setiap kegiatan',
+                                            'Membangun sinergi dengan seluruh elemen kampus',
+                                        ].map((item, index) => (
+                                            <li key={index} className="flex items-start gap-3 text-slate-300">
+                                                <CheckCircle className="w-5 h-5 text-blue-primary flex-shrink-0 mt-0.5" />
+                                                <span>{item}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
-                                <h3 className="text-2xl font-bold">Misi</h3>
-                            </div>
-                            <ul className="space-y-3">
-                                {[
-                                    'Menyelenggarakan program kerja yang inovatif dan bermanfaat',
-                                    'Menjadi wadah aspirasi mahasiswa yang responsif dan solutif',
-                                    'Memperkuat nilai-nilai keislaman dalam setiap kegiatan',
-                                    'Membangun sinergi dengan seluruh elemen kampus',
-                                ].map((item, index) => (
-                                    <li key={index} className="flex items-start gap-3 text-slate-300">
-                                        <CheckCircle className="w-5 h-5 text-blue-primary flex-shrink-0 mt-0.5" />
-                                        <span>{item}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                            )
+                        })()}
                     </div>
                 </div>
             </section>
@@ -617,7 +697,7 @@ function App() {
                     {/* Copyright */}
                     <div className="pt-8 border-t border-dark-border/50 text-center">
                         <p className="text-slate-400 text-sm">
-                            © 2025 BEM Universitas KH. A. Wahab Hasbullah Jombang
+                            © 2026 BEM Universitas KH. A. Wahab Hasbullah Jombang
                         </p>
                         <p className="text-slate-500 text-xs mt-2">
                             Kabinet Sinergi Perubahan - Inovatif, Aspiratif, dan Religius
