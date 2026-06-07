@@ -500,80 +500,140 @@ function App() {
                         </p>
                     </div>
 
-                    {/* Featured Billboard Card: SEMINAR NASIONAL BERSERTIFIKAT 2026 */}
-                    <div className="border border-red-500/30 bg-gradient-to-br from-red-950/20 via-dark-card to-red-950/20 rounded-3xl p-6 md:p-10 mb-12 shadow-[0_0_50px_rgba(239,68,68,0.1)] relative overflow-hidden group hover:border-red-500/50 transition-all duration-500">
-                        {/* Animated gradient light rays */}
-                        <div className="absolute top-0 right-0 w-80 h-80 bg-red-600/10 rounded-full blur-[100px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
-                        <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-orange-600/10 rounded-full blur-[100px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
+                    {/* Top Featured Grid: Ucapan Hari Besar & Seminar Nasional */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                        {/* Ucapan Hari Besar: Hari Lahir Pancasila */}
+                        <div className="lg:col-span-1 border border-red-600/30 bg-gradient-to-b from-red-950/20 via-dark-card to-dark-card rounded-3xl p-6 shadow-[0_0_40px_rgba(220,38,38,0.1)] relative overflow-hidden group hover:border-red-600/50 hover:shadow-[0_0_50px_rgba(220,38,38,0.25)] transition-all duration-500 flex flex-col justify-between">
+                            {/* Animated red glow inside */}
+                            <div className="absolute -top-10 -left-10 w-40 h-40 bg-red-600/10 rounded-full blur-[60px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
+                            
+                            <div>
+                                {/* Card Header */}
+                                <div className="flex items-center justify-between mb-6">
+                                    <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-950/40 border border-red-500/30 text-red-400 text-xs font-bold">
+                                        🇮🇩 Hari Nasional
+                                    </span>
+                                    <span className="text-xs text-slate-500 font-semibold">1 Juni 2025</span>
+                                </div>
 
-                        {/* Top banner tag */}
-                        <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-                            <div className="flex items-center gap-3 flex-wrap">
-                                <span className="px-4 py-1.5 bg-gradient-to-r from-red-600 to-orange-500 text-white text-xs font-black rounded-full uppercase tracking-wider animate-bounce shadow-glow-red">
-                                    LIMITED OFFER
-                                </span>
-                                <span className="flex items-center gap-1.5 text-orange-400 text-sm font-bold bg-orange-950/40 border border-orange-500/30 px-3 py-1 rounded-full">
-                                    ⚡ Kuota SUPER TERBATAS
-                                </span>
-                                <span className="flex items-center gap-1.5 text-red-400 text-sm font-bold bg-red-950/40 border border-red-500/30 px-3 py-1 rounded-full">
-                                    🔥 Selalu SOLD OUT di setiap event!
-                                </span>
-                            </div>
-                            <div className="text-right">
-                                <span className="text-2xl md:text-3xl font-black text-red-500 tracking-tight animate-pulse drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]">
-                                    100% GRATIS!
-                                </span>
-                            </div>
-                        </div>
+                                {/* Title */}
+                                <div className="mb-4">
+                                    <h3 className="text-2xl font-black text-white leading-tight tracking-tight">
+                                        Selamat Hari Lahir <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-slate-200">Pancasila</span>
+                                    </h3>
+                                    <div className="h-1 w-20 bg-gradient-to-r from-red-600 to-slate-200 rounded mt-2"></div>
+                                </div>
 
-                        {/* Headline */}
-                        <div className="mb-6">
-                            <h3 className="text-3xl md:text-5xl font-black text-white leading-tight mb-4 tracking-wide">
-                                SEMINAR NASIONAL BERSERTIFIKAT 2026
-                            </h3>
-                            <p className="text-xl md:text-2xl text-slate-300 font-bold">
-                                🎓 6 TOPIK PILIHAN | TANPA BIAYA | E-SERTIFIKAT NASIONAL
-                            </p>
-                        </div>
-
-                        <div className="grid md:grid-cols-2 gap-8 items-center border-t border-slate-800 pt-6">
-                            {/* Copywriting */}
-                            <div className="space-y-4">
-                                <div className="p-4 bg-dark-bg/60 rounded-2xl border border-slate-800">
-                                    <p className="text-slate-300 leading-relaxed text-sm italic">
-                                        &ldquo;Baca baik-baik ya… Kesempatan seperti ini tidak datang dua kali. Banyak peserta kami sebelumnya berkata: <span className="text-red-400 font-semibold">&apos;Kak, nyesel telat daftar… kuotanya sudah habis!&apos; 😭</span> Dan faktanya: <span className="text-orange-400 font-semibold">Setiap seminar SOLD OUT dalam hitungan jam.</span>&rdquo;
+                                {/* Body Text */}
+                                <div className="space-y-3 text-slate-300 text-xs md:text-sm leading-relaxed mb-6">
+                                    <p className="font-semibold text-slate-200 italic border-l-2 border-red-500 pl-3">
+                                        &ldquo;Di Hari Lahir Pancasila ini, mari kita perkuat nilai gotong royong, toleransi, dan cinta tanah air demi Indonesia yang lebih maju.&rdquo;
+                                    </p>
+                                    <p className="text-slate-400 text-xs leading-relaxed">
+                                        Pancasila bukan sekadar dasar negara, tetapi juga pedoman dalam membangun karakter, menjaga persatuan, dan menghadapi berbagai tantangan zaman.
+                                    </p>
+                                    <p className="text-slate-400 text-xs leading-relaxed">
+                                        Sebagai mahasiswa, mari terus menanamkan nilai-nilai Pancasila dalam setiap langkah pengabdian, kepemimpinan, dan kontribusi nyata untuk bangsa.
                                     </p>
                                 </div>
-                                <p className="text-slate-400 text-sm">
-                                    Ini BUKAN seminar biasa. Ini adalah bekal nyata untuk upgrade skill Anda!
-                                </p>
+
+                                {/* Quote */}
+                                <div className="p-3 bg-red-950/20 border border-red-500/20 rounded-xl mb-6">
+                                    <p className="text-[11px] md:text-xs text-red-400 font-bold leading-relaxed">
+                                        ✨ &ldquo;Bersatu dalam keberagaman, bergerak dalam kebersamaan, dan berkarya untuk Indonesia.&rdquo;
+                                    </p>
+                                </div>
                             </div>
 
-                            {/* Bullet points & CTA */}
-                            <div className="space-y-4">
-                                <ul className="grid grid-cols-2 gap-2 text-sm text-slate-300">
-                                    <li className="flex items-center gap-2">
-                                        <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-                                        <span>Upgrade Skill</span>
-                                    </li>
-                                    <li className="flex items-center gap-2">
-                                        <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-                                        <span>Menambah Value CV</span>
-                                    </li>
-                                    <li className="flex items-center gap-2">
-                                        <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-                                        <span>Persiapan Karier</span>
-                                    </li>
-                                    <li className="flex items-center gap-2">
-                                        <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-                                        <span>Bisnis Era Digital</span>
-                                    </li>
-                                </ul>
-
-                                <div className="p-3 bg-emerald-950/20 border border-emerald-500/20 rounded-xl text-xs text-emerald-400 flex items-center gap-2">
-                                    <AlertTriangle className="w-4 h-4 flex-shrink-0 text-emerald-400" />
-                                    <span><strong>PENTING:</strong> JOIN GRUP WA = RESMI TERDAFTAR ✅</span>
+                            {/* Card Footer */}
+                            <div className="border-t border-slate-800/80 pt-4 mt-auto">
+                                <div className="text-[11px] font-bold text-slate-400 mb-3 tracking-wide">
+                                    BEM Universitas KH. A. Wahab Hasbullah
                                 </div>
+                                <div className="flex flex-wrap gap-1.5">
+                                    {['#HariLahirPancasila', '#BEMUNWAHA', '#MahasiswaBerdaya', '#GenerasiPancasila'].map((tag) => (
+                                        <span key={tag} className="text-[10px] px-2 py-0.5 rounded bg-slate-800/50 text-slate-400 border border-slate-700/30 font-semibold">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Featured Billboard Card: SEMINAR NASIONAL BERSERTIFIKAT 2026 */}
+                        <div className="lg:col-span-2 border border-red-500/30 bg-gradient-to-br from-red-950/20 via-dark-card to-red-950/20 rounded-3xl p-6 md:p-8 shadow-[0_0_50px_rgba(239,68,68,0.1)] relative overflow-hidden group hover:border-red-500/50 transition-all duration-500 flex flex-col justify-between">
+                            {/* Animated gradient light rays */}
+                            <div className="absolute top-0 right-0 w-80 h-80 bg-red-600/10 rounded-full blur-[100px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
+                            <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-orange-600/10 rounded-full blur-[100px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
+
+                            <div>
+                                {/* Top banner tag */}
+                                <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+                                    <div className="flex items-center gap-2 flex-wrap">
+                                        <span className="px-3 py-1 bg-gradient-to-r from-red-600 to-orange-500 text-white text-[10px] font-black rounded-full uppercase tracking-wider animate-bounce shadow-glow-red">
+                                            LIMITED OFFER
+                                        </span>
+                                        <span className="flex items-center gap-1.5 text-orange-400 text-xs font-bold bg-orange-950/40 border border-orange-500/30 px-2.5 py-0.5 rounded-full">
+                                            ⚡ Kuota SUPER TERBATAS
+                                        </span>
+                                        <span className="flex items-center gap-1.5 text-red-400 text-xs font-bold bg-red-950/40 border border-red-500/30 px-2.5 py-0.5 rounded-full">
+                                            🔥 Selalu SOLD OUT!
+                                        </span>
+                                    </div>
+                                    <div className="text-right">
+                                        <span className="text-xl md:text-2xl font-black text-red-500 tracking-tight animate-pulse drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]">
+                                            100% GRATIS!
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* Headline */}
+                                <div className="mb-6">
+                                    <h3 className="text-2xl md:text-4xl font-black text-white leading-tight mb-2 tracking-wide">
+                                        SEMINAR NASIONAL BERSERTIFIKAT 2026
+                                    </h3>
+                                    <p className="text-sm md:text-base text-slate-300 font-bold">
+                                        🎓 6 TOPIK PILIHAN | TANPA BIAYA | E-SERTIFIKAT NASIONAL
+                                    </p>
+                                </div>
+
+                                <div className="grid md:grid-cols-2 gap-6 items-center border-t border-slate-800/80 pt-4">
+                                    {/* Copywriting */}
+                                    <div className="space-y-3">
+                                        <div className="p-3 bg-dark-bg/60 rounded-xl border border-slate-800">
+                                            <p className="text-slate-300 leading-relaxed text-xs italic">
+                                                &ldquo;Baca baik-baik ya… Kesempatan seperti ini tidak datang dua kali. Banyak peserta kami sebelumnya berkata: <span className="text-red-400 font-semibold">&apos;Kak, nyesel telat daftar… kuotanya sudah habis!&apos; 😭</span> Dan faktanya: <span className="text-orange-400 font-semibold">Setiap seminar SOLD OUT dalam hitungan jam.</span>&rdquo;
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Bullet points & CTA */}
+                                    <div className="space-y-3">
+                                        <ul className="grid grid-cols-2 gap-1.5 text-xs text-slate-300">
+                                            <li className="flex items-center gap-1.5">
+                                                <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                                                <span>Upgrade Skill</span>
+                                            </li>
+                                            <li className="flex items-center gap-1.5">
+                                                <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                                                <span>Menambah Value CV</span>
+                                            </li>
+                                            <li className="flex items-center gap-1.5">
+                                                <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                                                <span>Persiapan Karier</span>
+                                            </li>
+                                            <li className="flex items-center gap-1.5">
+                                                <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                                                <span>Bisnis Era Digital</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="p-3 bg-emerald-950/20 border border-emerald-500/20 rounded-xl text-xs text-emerald-400 flex items-center gap-2 mt-6">
+                                <AlertTriangle className="w-4 h-4 flex-shrink-0 text-emerald-400" />
+                                <span><strong>PENTING:</strong> JOIN GRUP WA = RESMI TERDAFTAR ✅</span>
                             </div>
                         </div>
                     </div>
