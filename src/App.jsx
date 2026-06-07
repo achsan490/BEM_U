@@ -1,5 +1,104 @@
-import { Instagram, Youtube, Music, MessageCircle, CheckCircle, Sparkles, Users, Heart, BookOpen, Award, Target, Lightbulb, Menu, X } from 'lucide-react'
+import { Instagram, Youtube, Music, MessageCircle, CheckCircle, Sparkles, Users, Heart, BookOpen, Award, Target, Lightbulb, Menu, X, Calendar, Clock, ExternalLink, AlertTriangle, Video, Phone, ArrowRight, Megaphone } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
+
+const seminars = [
+    {
+        id: 1,
+        num: "01",
+        title: "PUBLIC SPEAKING & PERSONAL BRANDING",
+        tagline: "BICARA BERDAMPAK, CITRA MENARIK!",
+        speaker: "Aulia Dewi Azzahrani",
+        role: "Public Speaker",
+        date: "Sabtu, 11 Juli 2026",
+        time: "09:00 WIB - Selesai",
+        link: "https://bit.ly/RSN169",
+        color: "from-blue-500 to-indigo-500",
+        shadow: "shadow-blue-500/10",
+        accent: "text-blue-400",
+        bgLight: "bg-blue-500/10",
+        borderGlow: "hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"
+    },
+    {
+        id: 2,
+        num: "02",
+        title: "BUSINESS GROWTH & ENTREPRENEURSHIP",
+        tagline: "INOVATIF HARI INI, SUKSES ESOK HARI!",
+        speaker: "Sahda Salsabila Rosadi, S.Ag., S.Psi",
+        role: "Founder Edunesia.indonesia, Writer & Speaker",
+        date: "Minggu, 12 Juli 2026",
+        time: "09:00 WIB - Selesai",
+        link: "https://bit.ly/RSN170",
+        color: "from-amber-500 to-orange-500",
+        shadow: "shadow-orange-500/10",
+        accent: "text-orange-400",
+        bgLight: "bg-orange-500/10",
+        borderGlow: "hover:border-orange-500/50 hover:shadow-[0_0_30px_rgba(249,115,22,0.3)]"
+    },
+    {
+        id: 3,
+        num: "03",
+        title: "MS WORD FOR SMART PRODUCTIVITY",
+        tagline: "KERJA LEBIH CEPAT, HASIL LEBIH TEPAT!",
+        speaker: "M. Adrian Rafly, S.Sos",
+        role: "Microsoft Certified Specialist",
+        date: "Sabtu, 18 Juli 2026",
+        time: "08:00 WIB - Selesai",
+        link: "https://bit.ly/RSN171",
+        color: "from-cyan-500 to-blue-500",
+        shadow: "shadow-cyan-500/10",
+        accent: "text-cyan-400",
+        bgLight: "bg-cyan-500/10",
+        borderGlow: "hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]"
+    },
+    {
+        id: 4,
+        num: "04",
+        title: "MENTAL HEALTH & SELF GROWTH",
+        tagline: "GROWTH POSITIF, HIDUP LEBIH PRODUKTIF!",
+        speaker: "Nursyifa Az Zahra, M.Psi., Psikolog",
+        role: "Founder Teman Dengar & Psikolog",
+        date: "Minggu, 19 Juli 2026",
+        time: "09:00 WIB - Selesai",
+        link: "https://bit.ly/RSN172",
+        color: "from-purple-500 to-fuchsia-500",
+        shadow: "shadow-purple-500/10",
+        accent: "text-purple-400",
+        bgLight: "bg-purple-500/10",
+        borderGlow: "hover:border-purple-500/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.3)]"
+    },
+    {
+        id: 5,
+        num: "05",
+        title: "UI/UX DESIGN & DIGITAL CAREER",
+        tagline: "UPGRADE SKILL, BANGUN KARIER, RAIH PENGHASILAN!",
+        speaker: "Inka Andini Firmanzah",
+        role: "UI/UX Designer & Portfolio Mentor",
+        date: "Sabtu, 25 Juli 2026",
+        time: "09:00 WIB - Selesai",
+        link: "https://bit.ly/RSN173",
+        color: "from-pink-500 to-rose-500",
+        shadow: "shadow-rose-500/10",
+        accent: "text-rose-400",
+        bgLight: "bg-rose-500/10",
+        borderGlow: "hover:border-rose-500/50 hover:shadow-[0_0_30px_rgba(244,63,94,0.3)]"
+    },
+    {
+        id: 6,
+        num: "06",
+        title: "ADMIN KEUANGAN & MS EXCEL EXPERT",
+        tagline: "KELOLA DATA, KUASAI KEUANGAN!",
+        speaker: "Siti Muharomah, S.Akt., CAP, C.Fins, CAA",
+        role: "Corporate Financial Analyst & Trainer",
+        date: "Minggu, 26 Juli 2026",
+        time: "09:00 WIB - Selesai",
+        link: "https://bit.ly/RSN174",
+        color: "from-emerald-500 to-teal-500",
+        shadow: "shadow-emerald-500/10",
+        accent: "text-emerald-400",
+        bgLight: "bg-emerald-500/10",
+        borderGlow: "hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.3)]"
+    }
+];
 
 // Custom hook for scroll-triggered animations
 function useInView(options = {}) {
@@ -90,6 +189,7 @@ function App() {
                             {[
                                 { href: '#home', label: 'Home' },
                                 { href: '#profil', label: 'Profil' },
+                                { href: '#pengumuman', label: 'Pengumuman' },
                                 { href: '#proker', label: 'Proker' },
                                 { href: '#galeri', label: 'Galeri' },
                                 { href: '#sosmed', label: 'Sosmed' }
@@ -138,6 +238,7 @@ function App() {
                             {[
                                 { href: '#home', label: 'Home' },
                                 { href: '#profil', label: 'Profil' },
+                                { href: '#pengumuman', label: 'Pengumuman' },
                                 { href: '#proker', label: 'Proker' },
                                 { href: '#galeri', label: 'Galeri' },
                                 { href: '#sosmed', label: 'Sosmed' }
@@ -379,6 +480,257 @@ function App() {
                                 </div>
                             )
                         })()}
+                    </div>
+                </div>
+            </section>
+
+            {/* Papan Pengumuman Section */}
+            <section id="pengumuman" className="py-20 px-4 relative z-10">
+                <div className="max-w-7xl mx-auto">
+                    {/* Header */}
+                    <div className="text-center mb-12">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-primary/10 border border-blue-primary/30 text-blue-primary text-sm font-semibold mb-4 animate-pulse">
+                            <Megaphone className="w-4 h-4" /> Info Terkini BEM
+                        </div>
+                        <h2 className="text-4xl md:text-5xl font-black mb-4">
+                            <span className="gradient-text">Papan Pengumuman</span>
+                        </h2>
+                        <p className="text-slate-400 max-w-2xl mx-auto font-light text-base md:text-lg">
+                            Daftarkan dirimu dan ikuti program unggulan kami untuk upgrade skill dan value diri Anda!
+                        </p>
+                    </div>
+
+                    {/* Featured Billboard Card: SEMINAR NASIONAL BERSERTIFIKAT 2026 */}
+                    <div className="border border-red-500/30 bg-gradient-to-br from-red-950/20 via-dark-card to-red-950/20 rounded-3xl p-6 md:p-10 mb-12 shadow-[0_0_50px_rgba(239,68,68,0.1)] relative overflow-hidden group hover:border-red-500/50 transition-all duration-500">
+                        {/* Animated gradient light rays */}
+                        <div className="absolute top-0 right-0 w-80 h-80 bg-red-600/10 rounded-full blur-[100px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
+                        <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-orange-600/10 rounded-full blur-[100px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
+
+                        {/* Top banner tag */}
+                        <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+                            <div className="flex items-center gap-3 flex-wrap">
+                                <span className="px-4 py-1.5 bg-gradient-to-r from-red-600 to-orange-500 text-white text-xs font-black rounded-full uppercase tracking-wider animate-bounce shadow-glow-red">
+                                    LIMITED OFFER
+                                </span>
+                                <span className="flex items-center gap-1.5 text-orange-400 text-sm font-bold bg-orange-950/40 border border-orange-500/30 px-3 py-1 rounded-full">
+                                    ⚡ Kuota SUPER TERBATAS
+                                </span>
+                                <span className="flex items-center gap-1.5 text-red-400 text-sm font-bold bg-red-950/40 border border-red-500/30 px-3 py-1 rounded-full">
+                                    🔥 Selalu SOLD OUT di setiap event!
+                                </span>
+                            </div>
+                            <div className="text-right">
+                                <span className="text-2xl md:text-3xl font-black text-red-500 tracking-tight animate-pulse drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]">
+                                    100% GRATIS!
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Headline */}
+                        <div className="mb-6">
+                            <h3 className="text-3xl md:text-5xl font-black text-white leading-tight mb-4 tracking-wide">
+                                SEMINAR NASIONAL BERSERTIFIKAT 2026
+                            </h3>
+                            <p className="text-xl md:text-2xl text-slate-300 font-bold">
+                                🎓 6 TOPIK PILIHAN | TANPA BIAYA | E-SERTIFIKAT NASIONAL
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-8 items-center border-t border-slate-800 pt-6">
+                            {/* Copywriting */}
+                            <div className="space-y-4">
+                                <div className="p-4 bg-dark-bg/60 rounded-2xl border border-slate-800">
+                                    <p className="text-slate-300 leading-relaxed text-sm italic">
+                                        &ldquo;Baca baik-baik ya… Kesempatan seperti ini tidak datang dua kali. Banyak peserta kami sebelumnya berkata: <span className="text-red-400 font-semibold">&apos;Kak, nyesel telat daftar… kuotanya sudah habis!&apos; 😭</span> Dan faktanya: <span className="text-orange-400 font-semibold">Setiap seminar SOLD OUT dalam hitungan jam.</span>&rdquo;
+                                    </p>
+                                </div>
+                                <p className="text-slate-400 text-sm">
+                                    Ini BUKAN seminar biasa. Ini adalah bekal nyata untuk upgrade skill Anda!
+                                </p>
+                            </div>
+
+                            {/* Bullet points & CTA */}
+                            <div className="space-y-4">
+                                <ul className="grid grid-cols-2 gap-2 text-sm text-slate-300">
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                                        <span>Upgrade Skill</span>
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                                        <span>Menambah Value CV</span>
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                                        <span>Persiapan Karier</span>
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                                        <span>Bisnis Era Digital</span>
+                                    </li>
+                                </ul>
+
+                                <div className="p-3 bg-emerald-950/20 border border-emerald-500/20 rounded-xl text-xs text-emerald-400 flex items-center gap-2">
+                                    <AlertTriangle className="w-4 h-4 flex-shrink-0 text-emerald-400" />
+                                    <span><strong>PENTING:</strong> JOIN GRUP WA = RESMI TERDAFTAR ✅</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Seminars Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                        {seminars.map((sem) => {
+                            const [cardRef, cardInView] = useInView()
+                            return (
+                                <div
+                                    key={sem.id}
+                                    ref={cardRef}
+                                    className={`glass-card p-6 flex flex-col justify-between transition-all duration-300 relative overflow-hidden group ${sem.borderGlow} ${cardInView ? 'animate-fade-in-up' : 'opacity-0'}`}
+                                    style={{ animationDelay: `${sem.id * 0.05}s` }}
+                                >
+                                    {/* Accent background mesh */}
+                                    <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${sem.color} opacity-[0.03] group-hover:opacity-[0.08] blur-xl rounded-full transition-opacity duration-300`}></div>
+
+                                    <div>
+                                        {/* Card Top / Badge & Title */}
+                                        <div className="flex items-center justify-between mb-4">
+                                            <span className={`text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded bg-slate-800 ${sem.accent}`}>
+                                                Topik {sem.num}
+                                            </span>
+                                            <span className="text-3xl font-black text-slate-700/50 group-hover:text-slate-500/30 transition-colors duration-300">
+                                                #{sem.num}
+                                            </span>
+                                        </div>
+
+                                        {/* Seminar Title & Tagline */}
+                                        <h4 className="text-lg md:text-xl font-black text-white leading-tight mb-2 tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-300 transition-all">
+                                            {sem.title}
+                                        </h4>
+                                        <p className="text-slate-400 text-xs font-semibold italic border-l-2 border-slate-700 pl-2 py-0.5 mb-6 leading-relaxed">
+                                            &ldquo;{sem.tagline}&rdquo;
+                                        </p>
+
+                                        {/* Speaker Block */}
+                                        <div className="mb-6 p-3 rounded-xl bg-dark-bg/40 border border-dark-border/40 group-hover:border-slate-800 transition-colors duration-300">
+                                            <div className="flex items-start gap-3">
+                                                <div className={`w-8 h-8 rounded-lg ${sem.bgLight} flex items-center justify-center flex-shrink-0 mt-0.5`}>
+                                                    <Users className={`w-4 h-4 ${sem.accent}`} />
+                                                </div>
+                                                <div>
+                                                    <div className="text-xs text-slate-500 uppercase font-bold tracking-wider">Pembicara</div>
+                                                    <div className="text-sm font-bold text-slate-200">{sem.speaker}</div>
+                                                    {sem.role && <div className="text-[11px] text-slate-400 font-medium leading-normal mt-0.5">{sem.role}</div>}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Date and Time */}
+                                        <div className="space-y-2 mb-6 text-xs text-slate-400">
+                                            <div className="flex items-center gap-2">
+                                                <Calendar className="w-4 h-4 text-slate-500" />
+                                                <span>{sem.date}</span>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <Clock className="w-4 h-4 text-slate-500" />
+                                                <span>{sem.time}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Action Button */}
+                                    <a
+                                        href={sem.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`w-full py-3 bg-gradient-to-r ${sem.color} text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all ${sem.shadow} shadow-lg hover:shadow-xl`}
+                                    >
+                                        <MessageCircle className="w-4 h-4" />
+                                        <span>Daftar via Grup WAG</span>
+                                        <ExternalLink className="w-3.5 h-3.5 opacity-60" />
+                                    </a>
+                                </div>
+                            )
+                        })}
+                    </div>
+
+                    {/* Global Meta & Info Banner */}
+                    <div className="glass-card p-6 md:p-8 border border-dark-border/80">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-center">
+                            {/* Broadcast Channels */}
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-xl bg-blue-primary/10 flex items-center justify-center flex-shrink-0">
+                                    <Video className="w-5 h-5 text-blue-primary" />
+                                </div>
+                                <div>
+                                    <div className="text-[11px] text-slate-500 uppercase font-black tracking-wider">Media Live Broadcast</div>
+                                    <div className="text-sm font-bold text-slate-300">Zoom Meeting & YouTube Live</div>
+                                </div>
+                            </div>
+
+                            {/* Certificate */}
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-xl bg-cyan-accent/10 flex items-center justify-center flex-shrink-0">
+                                    <Award className="w-5 h-5 text-cyan-accent" />
+                                </div>
+                                <div>
+                                    <div className="text-[11px] text-slate-500 uppercase font-black tracking-wider">Apresiasi & Dokumen</div>
+                                    <div className="text-sm font-bold text-slate-300">E-Sertifikat Tingkat Nasional</div>
+                                </div>
+                            </div>
+
+                            {/* Organizer Info */}
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-xl bg-pink-500/10 flex items-center justify-center flex-shrink-0">
+                                    <Instagram className="w-5 h-5 text-pink-400" />
+                                </div>
+                                <div>
+                                    <div className="text-[11px] text-slate-500 uppercase font-black tracking-wider">Instagram Event</div>
+                                    <a
+                                        href="https://www.instagram.com/eduuverse"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-sm font-bold text-pink-400 hover:underline flex items-center gap-1"
+                                    >
+                                        @eduuverse <ExternalLink className="w-3 h-3" />
+                                    </a>
+                                </div>
+                            </div>
+
+                            {/* Contact Person */}
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                                    <Phone className="w-5 h-5 text-emerald-400" />
+                                </div>
+                                <div>
+                                    <div className="text-[11px] text-slate-500 uppercase font-black tracking-wider">Contact Person (WA)</div>
+                                    <a
+                                        href="https://wa.me/6288975516069"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-sm font-bold text-emerald-400 hover:underline flex items-center gap-1"
+                                    >
+                                        088975516069 <ExternalLink className="w-3 h-3" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Register Banner Footer */}
+                        <div className="mt-8 pt-6 border-t border-dark-border/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div className="text-sm text-slate-400">
+                                📢 <span className="font-semibold text-slate-300">Info Jadwal & Seminar Lainnya:</span> kunjungi portal seminar di bawah ini.
+                            </div>
+                            <a
+                                href="https://bit.ly/RgSENA"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-6 py-2.5 bg-gradient-to-r from-blue-primary to-cyan-accent text-white font-bold text-sm rounded-full flex items-center gap-1.5 hover:scale-105 hover:shadow-glow-blue transition-all"
+                            >
+                                <span>Portal Info Seminar</span>
+                                <ArrowRight className="w-4 h-4" />
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>
