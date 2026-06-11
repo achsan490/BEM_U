@@ -502,45 +502,56 @@ function App() {
 
                     {/* Top Featured Grid: Ucapan Hari Besar & Seminar Nasional */}
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-                        {/* Ucapan Hari Besar: Hari Lahir Pancasila */}
-                        <div className="lg:col-span-1 border border-red-600/30 bg-gradient-to-b from-red-950/20 via-dark-card to-dark-card rounded-3xl p-6 shadow-[0_0_40px_rgba(220,38,38,0.1)] relative overflow-hidden group hover:border-red-600/50 hover:shadow-[0_0_50px_rgba(220,38,38,0.25)] transition-all duration-500 flex flex-col justify-between">
-                            {/* Animated red glow inside */}
-                            <div className="absolute -top-10 -left-10 w-40 h-40 bg-red-600/10 rounded-full blur-[60px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
+                        {/* Himbauan Muktamar Kebudayaan Indonesia LESBUMI PBNU 2026 */}
+                        <div className="lg:col-span-1 border border-emerald-600/30 bg-gradient-to-b from-emerald-950/20 via-dark-card to-dark-card rounded-3xl p-6 shadow-[0_0_40px_rgba(16,185,129,0.1)] relative overflow-hidden group hover:border-emerald-600/50 hover:shadow-[0_0_50px_rgba(16,185,129,0.25)] transition-all duration-500 flex flex-col justify-between">
+                            {/* Animated emerald glow inside */}
+                            <div className="absolute -top-10 -left-10 w-40 h-40 bg-emerald-600/10 rounded-full blur-[60px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
                             
                             <div>
                                 {/* Card Header */}
                                 <div className="flex items-center justify-between mb-6">
-                                    <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-950/40 border border-red-500/30 text-red-400 text-xs font-bold">
-                                        🇮🇩 Hari Nasional
+                                    <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
+                                        📢 Himbauan Resmi
                                     </span>
-                                    <span className="text-xs text-slate-500 font-semibold">1 Juni 2025</span>
+                                    <span className="text-xs text-slate-500 font-semibold">11 Juni 2026</span>
                                 </div>
 
                                 {/* Title */}
                                 <div className="mb-4">
                                     <h3 className="text-2xl font-black text-white leading-tight tracking-tight">
-                                        Selamat Hari Lahir <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-slate-200">Pancasila</span>
+                                        Muktamar Kebudayaan <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-amber-300">LESBUMI 2026</span>
                                     </h3>
-                                    <div className="h-1 w-20 bg-gradient-to-r from-red-600 to-slate-200 rounded mt-2"></div>
+                                    <div className="h-1 w-20 bg-gradient-to-r from-emerald-600 to-amber-400 rounded mt-2"></div>
                                 </div>
 
                                 {/* Body Text */}
                                 <div className="space-y-3 text-slate-300 text-xs md:text-sm leading-relaxed mb-6">
-                                    <p className="font-semibold text-slate-200 italic border-l-2 border-red-500 pl-3">
-                                        &ldquo;Di Hari Lahir Pancasila ini, mari kita perkuat nilai gotong royong, toleransi, dan cinta tanah air demi Indonesia yang lebih maju.&rdquo;
+                                    <p className="font-semibold text-slate-200 italic border-l-2 border-emerald-500 pl-3">
+                                        &ldquo;Himbauan kepada seluruh civitas akademika UNWAHA (Dosen, Tendik, & Mahasiswa) untuk hadir dan memeriahkan Muktamar Kebudayaan Indonesia.&rdquo;
                                     </p>
+                                    <div className="bg-dark-bg/60 border border-slate-800/80 rounded-xl p-3 space-y-2 mt-2">
+                                        <div className="flex items-start gap-2 text-xs">
+                                            <span className="text-amber-400">📍</span>
+                                            <span>Universitas KH. A. Wahab Hasbullah (UNWAHA)</span>
+                                        </div>
+                                        <div className="flex items-center gap-2 text-xs">
+                                            <span className="text-amber-400">📅</span>
+                                            <span>12–14 Juni 2026</span>
+                                        </div>
+                                        <div className="flex items-center gap-2 text-xs">
+                                            <span className="text-amber-400">🏷️</span>
+                                            <span>Tema: &ldquo;Kembali ke Akar&rdquo;</span>
+                                        </div>
+                                    </div>
                                     <p className="text-slate-400 text-xs leading-relaxed">
-                                        Pancasila bukan sekadar dasar negara, tetapi juga pedoman dalam membangun karakter, menjaga persatuan, dan menghadapi berbagai tantangan zaman.
-                                    </p>
-                                    <p className="text-slate-400 text-xs leading-relaxed">
-                                        Sebagai mahasiswa, mari terus menanamkan nilai-nilai Pancasila dalam setiap langkah pengabdian, kepemimpinan, dan kontribusi nyata untuk bangsa.
+                                        Mari bersama menjadi tuan rumah yang baik, tunjukkan semangat kebersamaan, dan sambut tamu muktamar dengan penuh keramahan.
                                     </p>
                                 </div>
 
                                 {/* Quote */}
-                                <div className="p-3 bg-red-950/20 border border-red-500/20 rounded-xl mb-6">
-                                    <p className="text-[11px] md:text-xs text-red-400 font-bold leading-relaxed">
-                                        ✨ &ldquo;Bersatu dalam keberagaman, bergerak dalam kebersamaan, dan berkarya untuk Indonesia.&rdquo;
+                                <div className="p-3 bg-emerald-950/20 border border-emerald-500/20 rounded-xl mb-6">
+                                    <p className="text-[11px] md:text-xs text-emerald-400 font-bold leading-relaxed">
+                                        ✨ Bersama kita sukseskan forum kebudayaan nasional dan kokohkan UNWAHA sebagai pusat tradisi & kebudayaan Nusantara!
                                     </p>
                                 </div>
                             </div>
@@ -551,7 +562,7 @@ function App() {
                                     BEM Universitas KH. A. Wahab Hasbullah
                                 </div>
                                 <div className="flex flex-wrap gap-1.5">
-                                    {['#HariLahirPancasila', '#BEMUNWAHA', '#MahasiswaBerdaya', '#GenerasiPancasila'].map((tag) => (
+                                    {['#LESBUMI2026', '#UNWAHA', '#MuktamarKebudayaan', '#KembaliKeAkar'].map((tag) => (
                                         <span key={tag} className="text-[10px] px-2 py-0.5 rounded bg-slate-800/50 text-slate-400 border border-slate-700/30 font-semibold">
                                             {tag}
                                         </span>
