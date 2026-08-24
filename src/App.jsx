@@ -315,11 +315,11 @@ export default function App() {
                         
                         {/* Brand Logo & Name */}
                         <a href="#home" className="flex items-center gap-3 group">
-                            <div className="relative">
+                            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-100 to-amber-50 border border-amber-300/80 p-1 flex items-center justify-center shadow-sm">
                                 <img
-                                    src="/logo-kanagara.jpg"
+                                    src="/logo-kanagara.png"
                                     alt="Logo Kabinet Kanagara UNWAHA"
-                                    className="w-10 h-10 object-contain rounded-full border border-amber-200 shadow-sm bg-slate-900"
+                                    className="w-full h-full object-contain"
                                 />
                             </div>
                             <div>
@@ -475,11 +475,11 @@ export default function App() {
                                 </div>
 
                                 {/* Logo & Titles */}
-                                <div className="w-24 h-24 mx-auto mb-4 rounded-full p-1.5 bg-gradient-to-tr from-amber-500 via-amber-400 to-yellow-500 shadow-md flex items-center justify-center">
+                                <div className="w-28 h-28 mx-auto mb-4 rounded-full p-2 bg-gradient-to-tr from-amber-100 via-amber-50 to-orange-50 shadow-md border border-amber-200/80 flex items-center justify-center">
                                     <img
-                                        src="/logo-kanagara.jpg"
+                                        src="/logo-kanagara.png"
                                         alt="Logo Kabinet Kanagara BEM UNWAHA"
-                                        className="w-full h-full object-contain rounded-full border-2 border-white bg-slate-900"
+                                        className="w-full h-full object-contain drop-shadow-sm hover:scale-105 transition-transform duration-500"
                                     />
                                 </div>
                                 <h3 className="text-xl font-extrabold text-slate-900 leading-tight">
@@ -923,19 +923,19 @@ export default function App() {
                             
                             {/* Logo Showcase Left */}
                             <div className="lg:col-span-4 flex flex-col items-center text-center">
-                                <div className="relative p-3 rounded-3xl bg-white border border-amber-200 shadow-xl max-w-[260px] w-full">
-                                    <div className="rounded-2xl overflow-hidden bg-slate-900/5 p-2">
+                                <div className="relative p-6 rounded-3xl bg-white border border-amber-200/80 shadow-xl max-w-[280px] w-full">
+                                    <div className="w-48 h-48 mx-auto rounded-full bg-gradient-to-tr from-amber-100/70 via-amber-50/80 to-orange-50/50 p-3 flex items-center justify-center border border-amber-200/70 shadow-inner">
                                         <img
-                                            src="/logo-kanagara.jpg"
+                                            src="/logo-kanagara.png"
                                             alt="Logo Bunga Matahari Emas - Kabinet Kanagara BEM UNWAHA"
-                                            className="w-full h-auto object-contain hover:scale-105 transition-transform duration-500"
+                                            className="w-full h-full object-contain drop-shadow-md hover:rotate-6 transition-transform duration-700"
                                         />
                                     </div>
-                                    <div className="mt-4 pb-2">
-                                        <div className="text-xs font-extrabold text-amber-800 uppercase tracking-wider">
+                                    <div className="mt-4">
+                                        <div className="text-sm font-extrabold text-amber-900 uppercase tracking-wider">
                                             Bunga Matahari Emas
                                         </div>
-                                        <div className="text-[11px] text-slate-500 font-medium mt-0.5">
+                                        <div className="text-xs text-amber-700 font-semibold mt-0.5">
                                             Lambang Resmi Kabinet Kanagara
                                         </div>
                                     </div>
@@ -1213,11 +1213,13 @@ export default function App() {
                         {/* Column 1: Organization Info */}
                         <div className="lg:col-span-2 space-y-4">
                             <div className="flex items-center gap-3">
-                                <img
-                                    src="/logo-kanagara.jpg"
-                                    alt="Logo Kabinet Kanagara"
-                                    className="w-10 h-10 object-contain rounded-full border border-amber-500/40 bg-slate-900"
-                                />
+                                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-100 to-amber-50 border border-amber-400/50 p-1 flex items-center justify-center flex-shrink-0">
+                                    <img
+                                        src="/logo-kanagara.png"
+                                        alt="Logo Kabinet Kanagara"
+                                        className="w-full h-full object-contain"
+                                    />
+                                </div>
                                 <div>
                                     <div className="font-bold text-white text-base">BEM UNWAHA</div>
                                     <div className="text-[11px] text-amber-400 font-semibold">Kabinet Kanagara 2025/2026</div>
