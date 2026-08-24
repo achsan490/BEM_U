@@ -1,10 +1,90 @@
-import { Instagram, Youtube, Music, MessageCircle, CheckCircle, Sparkles, Users, Heart, BookOpen, Award, Target, Lightbulb, Menu, X, Calendar, Clock, ExternalLink, AlertTriangle, Video, Phone, ArrowRight, Megaphone } from 'lucide-react'
+import {
+    Instagram, Youtube, Music, MessageCircle, CheckCircle, Sparkles,
+    Users, Heart, BookOpen, Award, Target, Lightbulb, Menu, X,
+    Calendar, Clock, ExternalLink, AlertTriangle, Video, Phone,
+    ArrowRight, Megaphone, ChevronDown, Star, MapPin, Mail,
+    ArrowUpCircle, GraduationCap, Zap, Shield, FileText, HelpCircle,
+    Handshake, Search, Layers, Compass, Share2, Info, ChevronRight,
+    Building2, Bell, Sparkle
+} from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
+
+// ============================================================
+// DATA SETTINGS & CONTENT
+// ============================================================
+
+const quickServices = [
+    {
+        id: 'aspirasi',
+        title: 'Kotak Aspirasi Mahasiswa',
+        desc: 'Sampaikan kritik, saran, dan aspirasi untuk kemajuan kampus dan pergerakan mahasiswa.',
+        icon: MessageCircle,
+        badge: 'Advokasi',
+        badgeColor: 'bg-blue-50 text-blue-700 border-blue-200',
+        iconBg: 'bg-blue-600 text-white',
+        link: 'https://wa.me/6283839976681?text=Halo%20BEM%20UNWAHA,%20saya%20ingin%20menyampaikan%20aspirasi:',
+        btnText: 'Kirim Aspirasi',
+    },
+    {
+        id: 'kalender',
+        title: 'Kalender Kegiatan Mahasiswa',
+        desc: 'Jadwal terpadu agenda organisasi, seminar, perlombaan, dan kegiatan civitas UNWAHA.',
+        icon: Calendar,
+        badge: 'Agenda',
+        badgeColor: 'bg-amber-50 text-amber-700 border-amber-200',
+        iconBg: 'bg-amber-500 text-white',
+        link: '#pengumuman',
+        btnText: 'Lihat Jadwal',
+    },
+    {
+        id: 'pedoman',
+        title: 'Pedoman Administrasi & Surat',
+        desc: 'Panduan tata kelola administrasi ormawa, pengajuan surat izin, dan format proposal resmi.',
+        icon: FileText,
+        badge: 'Kesekretariatan',
+        badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+        iconBg: 'bg-emerald-600 text-white',
+        link: '#proker',
+        btnText: 'Akses Panduan',
+    },
+    {
+        id: 'peluang',
+        title: 'Ruang Peluang & Beasiswa',
+        desc: 'Informasi beasiswa, kesempatan magang, kompetisi nasional, dan program pengembangan karier.',
+        icon: GraduationCap,
+        badge: 'Pengembangan',
+        badgeColor: 'bg-purple-50 text-purple-700 border-purple-200',
+        iconBg: 'bg-purple-600 text-white',
+        link: 'https://bit.ly/RgSENA',
+        btnText: 'Info Beasiswa',
+    },
+    {
+        id: 'medpart',
+        title: 'Media Partner & Kolaborasi',
+        desc: 'Pengajuan kemitraan publikasi, sponsorship acara kampus, dan kolaborasi strategis antar lembaga.',
+        icon: Handshake,
+        badge: 'Kemitraan',
+        badgeColor: 'bg-rose-50 text-rose-700 border-rose-200',
+        iconBg: 'bg-rose-600 text-white',
+        link: 'https://wa.me/6283839976681?text=Halo%20BEM%20UNWAHA,%20kami%20tertarik%20mengajukan%20Media%20Partner:',
+        btnText: 'Ajukan Kerjasama',
+    },
+    {
+        id: 'faq',
+        title: 'Pusat Tanya Jawab (FAQ)',
+        desc: 'Jawaban atas pertanyaan umum seputar BEM UNWAHA, kegiatan kemahasiswaan, dan kampus.',
+        icon: HelpCircle,
+        badge: 'Informasi',
+        badgeColor: 'bg-cyan-50 text-cyan-700 border-cyan-200',
+        iconBg: 'bg-cyan-600 text-white',
+        link: '#profil',
+        btnText: 'Buka FAQ',
+    }
+]
 
 const seminars = [
     {
-        id: 1,
-        num: "01",
+        id: 1, num: "01",
         title: "PUBLIC SPEAKING & PERSONAL BRANDING",
         tagline: "BICARA BERDAMPAK, CITRA MENARIK!",
         speaker: "Aulia Dewi Azzahrani",
@@ -12,15 +92,12 @@ const seminars = [
         date: "Sabtu, 11 Juli 2026",
         time: "09:00 WIB - Selesai",
         link: "https://bit.ly/RSN169",
-        color: "from-blue-500 to-indigo-500",
-        shadow: "shadow-blue-500/10",
-        accent: "text-blue-400",
-        bgLight: "bg-blue-500/10",
-        borderGlow: "hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"
+        category: "Karier & Komunikasi",
+        color: "border-l-blue-600",
+        badgeColor: "bg-blue-50 text-blue-700",
     },
     {
-        id: 2,
-        num: "02",
+        id: 2, num: "02",
         title: "BUSINESS GROWTH & ENTREPRENEURSHIP",
         tagline: "INOVATIF HARI INI, SUKSES ESOK HARI!",
         speaker: "Sahda Salsabila Rosadi, S.Ag., S.Psi",
@@ -28,15 +105,12 @@ const seminars = [
         date: "Minggu, 12 Juli 2026",
         time: "09:00 WIB - Selesai",
         link: "https://bit.ly/RSN170",
-        color: "from-amber-500 to-orange-500",
-        shadow: "shadow-orange-500/10",
-        accent: "text-orange-400",
-        bgLight: "bg-orange-500/10",
-        borderGlow: "hover:border-orange-500/50 hover:shadow-[0_0_30px_rgba(249,115,22,0.3)]"
+        category: "Kewirausahaan",
+        color: "border-l-amber-500",
+        badgeColor: "bg-amber-50 text-amber-700",
     },
     {
-        id: 3,
-        num: "03",
+        id: 3, num: "03",
         title: "MS WORD FOR SMART PRODUCTIVITY",
         tagline: "KERJA LEBIH CEPAT, HASIL LEBIH TEPAT!",
         speaker: "M. Adrian Rafly, S.Sos",
@@ -44,15 +118,12 @@ const seminars = [
         date: "Sabtu, 18 Juli 2026",
         time: "08:00 WIB - Selesai",
         link: "https://bit.ly/RSN171",
-        color: "from-cyan-500 to-blue-500",
-        shadow: "shadow-cyan-500/10",
-        accent: "text-cyan-400",
-        bgLight: "bg-cyan-500/10",
-        borderGlow: "hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]"
+        category: "Digital Skill",
+        color: "border-l-cyan-600",
+        badgeColor: "bg-cyan-50 text-cyan-700",
     },
     {
-        id: 4,
-        num: "04",
+        id: 4, num: "04",
         title: "MENTAL HEALTH & SELF GROWTH",
         tagline: "GROWTH POSITIF, HIDUP LEBIH PRODUKTIF!",
         speaker: "Nursyifa Az Zahra, M.Psi., Psikolog",
@@ -60,15 +131,12 @@ const seminars = [
         date: "Minggu, 19 Juli 2026",
         time: "09:00 WIB - Selesai",
         link: "https://bit.ly/RSN172",
-        color: "from-purple-500 to-fuchsia-500",
-        shadow: "shadow-purple-500/10",
-        accent: "text-purple-400",
-        bgLight: "bg-purple-500/10",
-        borderGlow: "hover:border-purple-500/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.3)]"
+        category: "Psikologi & Self-Care",
+        color: "border-l-purple-600",
+        badgeColor: "bg-purple-50 text-purple-700",
     },
     {
-        id: 5,
-        num: "05",
+        id: 5, num: "05",
         title: "UI/UX DESIGN & DIGITAL CAREER",
         tagline: "UPGRADE SKILL, BANGUN KARIER, RAIH PENGHASILAN!",
         speaker: "Inka Andini Firmanzah",
@@ -76,15 +144,12 @@ const seminars = [
         date: "Sabtu, 25 Juli 2026",
         time: "09:00 WIB - Selesai",
         link: "https://bit.ly/RSN173",
-        color: "from-pink-500 to-rose-500",
-        shadow: "shadow-rose-500/10",
-        accent: "text-rose-400",
-        bgLight: "bg-rose-500/10",
-        borderGlow: "hover:border-rose-500/50 hover:shadow-[0_0_30px_rgba(244,63,94,0.3)]"
+        category: "Desain & Teknologi",
+        color: "border-l-rose-500",
+        badgeColor: "bg-rose-50 text-rose-700",
     },
     {
-        id: 6,
-        num: "06",
+        id: 6, num: "06",
         title: "ADMIN KEUANGAN & MS EXCEL EXPERT",
         tagline: "KELOLA DATA, KUASAI KEUANGAN!",
         speaker: "Siti Muharomah, S.Akt., CAP, C.Fins, CAA",
@@ -92,325 +157,448 @@ const seminars = [
         date: "Minggu, 26 Juli 2026",
         time: "09:00 WIB - Selesai",
         link: "https://bit.ly/RSN174",
-        color: "from-emerald-500 to-teal-500",
-        shadow: "shadow-emerald-500/10",
-        accent: "text-emerald-400",
-        bgLight: "bg-emerald-500/10",
-        borderGlow: "hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.3)]"
+        category: "Administrasi & Finansial",
+        color: "border-l-emerald-600",
+        badgeColor: "bg-emerald-50 text-emerald-700",
+    },
+]
+
+const prokerList = [
+    {
+        id: 1,
+        title: "Gema Sholawat & Doa Bersama",
+        desc: "Program keagamaan rutin untuk mempererat ukhuwah islamiyah dan membina karakter spiritual mahasiswa di lingkungan kampus berbasis Ahlussunnah wal Jama'ah.",
+        category: "Keagamaan",
+        kementerian: "Kemen. Agama & Moralitas",
+        icon: Heart,
+        iconColor: "text-blue-600 bg-blue-50",
+    },
+    {
+        id: 2,
+        title: "LDKM (Latihan Dasar Kepemimpinan)",
+        desc: "Kaderisasi kepemimpinan mahasiswa berjenjang untuk melahirkan pemimpin muda yang kritis, berintegritas, visioner, dan berakhlakul karimah.",
+        category: "Kaderisasi",
+        kementerian: "Kemen. PSDM",
+        icon: Users,
+        iconColor: "text-purple-600 bg-purple-50",
+    },
+    {
+        id: 3,
+        title: "BEM Mengabdi & Desa Binaan",
+        desc: "Aksi nyata pemberdayaan masyarakat pedesaan melalui edukasi sosial, bakti kesehatan, serta pendampingan ekonomi berbasis potensi lokal.",
+        category: "Pengabdian",
+        kementerian: "Kemen. Sosial & Pengmas",
+        icon: Sparkles,
+        iconColor: "text-emerald-600 bg-emerald-50",
+    },
+    {
+        id: 4,
+        title: "Kajian Ilmiah & Mimbar Aspirasi",
+        desc: "Forum diskusi kritis dan dialektika mahasiswa dalam merespons isu kebangsaan, kebijakan pendidikan tinggi, dan advokasi kesejahteraan mahasiswa.",
+        category: "Akademik & Isu",
+        kementerian: "Kemen. Kastrat & Advokasi",
+        icon: BookOpen,
+        iconColor: "text-amber-600 bg-amber-50",
+    },
+    {
+        id: 5,
+        title: "Pekan Kreativitas & Kompetisi Kampus",
+        desc: "Ajang unjuk bakat di bidang seni, olahraga, dan karya inovasi ilmiah untuk meningkatkan prestasi mahasiswa di tingkat regional dan nasional.",
+        category: "Minat & Bakat",
+        kementerian: "Kemen. Seni & Olahraga",
+        icon: Award,
+        iconColor: "text-rose-600 bg-rose-50",
+    },
+    {
+        id: 6,
+        title: "Soedirman Digital Empowerment",
+        desc: "Pelatihan keterampilan digital, bootcamp teknologi, UI/UX, dan literasi media guna mempersiapkan mahasiswa menghadapi dunia kerja modern.",
+        category: "Teknologi",
+        kementerian: "Kemen. Kominfo & Media",
+        icon: Zap,
+        iconColor: "text-cyan-600 bg-cyan-50",
     }
-];
+]
 
-// Custom hook for scroll-triggered animations
-function useInView(options = {}) {
-    const ref = useRef(null)
-    const [isInView, setIsInView] = useState(false)
+const pengurusData = [
+    {
+        nama: "Muhammad Fatih Azizi",
+        jabatan: "Ketua BEM UNWAHA",
+        periode: "2025/2026",
+        prodi: "Fakultas Ekonomi",
+        initial: "FA",
+        color: "bg-blue-600 text-white",
+    },
+    {
+        nama: "Lailatul Badriyah",
+        jabatan: "Wakil Ketua BEM",
+        periode: "2025/2026",
+        prodi: "Fakultas Agama Islam",
+        initial: "LB",
+        color: "bg-purple-600 text-white",
+    },
+    {
+        nama: "Nailul Muna",
+        jabatan: "Sekretaris Jenderal",
+        periode: "2025/2026",
+        prodi: "Fakultas Teknologi Informasi",
+        initial: "NM",
+        color: "bg-emerald-600 text-white",
+    },
+    {
+        nama: "Rizka Amalia",
+        jabatan: "Bendahara Umum",
+        periode: "2025/2026",
+        prodi: "Fakultas Ekonomi",
+        initial: "RA",
+        color: "bg-amber-600 text-white",
+    },
+]
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting) {
-                setIsInView(true)
-                // Once animated, keep it visible
-                observer.unobserve(entry.target)
-            }
-        }, {
-            threshold: 0.1,
-            ...options
-        })
+const galleryImages = [
+    { src: '/gambar2.JPG', title: 'Gema Sholawat Akbar', category: 'Keagamaan' },
+    { src: '/gambar6.JPG', title: 'LDKM Mahasiswa UNWAHA', category: 'Kepemimpinan' },
+    { src: '/gambar3.JPG', title: 'BEM Mengabdi di Desa Binaan', category: 'Sosial' },
+    { src: '/gambar7.JPG', title: 'Seminar Nasional Bersertifikat', category: 'Akademik' },
+    { src: '/gambar4.JPG', title: 'Diskusi & Kajian Publik', category: 'Advokasi' },
+    { src: '/gambar5.JPG', title: 'Festival & Kompetisi Kreatif', category: 'Minat & Bakat' },
+]
 
-        if (ref.current) {
-            observer.observe(ref.current)
-        }
+// ============================================================
+// MAIN APPLICATION COMPONENT
+// ============================================================
 
-        return () => {
-            if (ref.current) {
-                observer.unobserve(ref.current)
-            }
-        }
-    }, [])
-
-    return [ref, isInView]
-}
-
-function App() {
+export default function App() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [scrolled, setScrolled] = useState(false)
-    const [scrollY, setScrollY] = useState(0)
+    const [activeTab, setActiveTab] = useState('semua')
+    const [showBackToTop, setShowBackToTop] = useState(false)
 
-    // Detect scroll for navbar effect and parallax
     useEffect(() => {
         const handleScroll = () => {
-            const currentScrollY = window.scrollY
-            setScrolled(currentScrollY > 20)
-            setScrollY(currentScrollY)
+            const y = window.scrollY
+            setScrolled(y > 20)
+            setShowBackToTop(y > 500)
         }
-        window.addEventListener('scroll', handleScroll)
+        window.addEventListener('scroll', handleScroll, { passive: true })
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
+    const filteredProker = activeTab === 'semua' 
+        ? prokerList 
+        : prokerList.filter(p => p.category.toLowerCase().includes(activeTab.toLowerCase()))
+
     return (
-        <div className="min-h-screen bg-dark-bg text-slate-100 overflow-x-hidden">
-            {/* Mesh Gradient Background Effects with Parallax */}
-            <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                <div
-                    className="absolute top-0 left-1/4 w-96 h-96 bg-blue-glow opacity-30 blur-3xl"
-                    style={{ transform: `translateY(${scrollY * 0.5}px)` }}
-                ></div>
-                <div
-                    className="absolute top-1/3 right-1/4 w-96 h-96 bg-cyan-glow opacity-20 blur-3xl"
-                    style={{ transform: `translateY(${scrollY * 0.3}px)` }}
-                ></div>
-                <div
-                    className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-blue-glow opacity-25 blur-3xl"
-                    style={{ transform: `translateY(${scrollY * 0.4}px)` }}
-                ></div>
+        <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col antialiased">
+            
+            {/* Top Announcement Ribbon */}
+            <div className="bg-slate-900 text-white text-xs py-2 px-4 border-b border-slate-800">
+                <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                        <span className="bg-red-600 text-white px-2 py-0.5 rounded font-bold text-[10px] uppercase tracking-wider">HUT RI Ke-81</span>
+                        <span className="text-slate-300 font-medium truncate">🇮🇩 Bersatu, Berdaulat, Rakyat Sejahtera, Indonesia Maju!</span>
+                    </div>
+                    <div className="flex items-center gap-4 text-slate-400 text-[11px]">
+                        <a href="https://wa.me/6283839976681" target="_blank" rel="noopener noreferrer" className="hover:text-white transition flex items-center gap-1">
+                            <Phone className="w-3 h-3" /> Layanan Cepat: +62 838-3997-6681
+                        </a>
+                        <span className="hidden md:inline text-slate-600">•</span>
+                        <span className="hidden md:inline font-semibold text-amber-300">Kabinet Kanagara</span>
+                    </div>
+                </div>
             </div>
 
-            {/* Premium Glassmorphism Navbar */}
-            <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass-navbar-scrolled shadow-2xl' : 'glass-navbar'
-                }`}>
+            {/* Main Navigation Bar (Clean & Professional, inspired by apps.bem-unsoed.com) */}
+            <header className={`sticky top-0 z-50 transition-all duration-200 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/80 py-3' : 'bg-white border-b border-slate-100 py-4'}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-20">
-                        {/* Logo with Glow Effect */}
-                        <div className="flex items-center gap-3 group">
+                    <div className="flex items-center justify-between">
+                        
+                        {/* Brand Logo & Name */}
+                        <a href="#home" className="flex items-center gap-3 group">
                             <div className="relative">
                                 <img
-                                    src="/logo-unwaha.jpeg"
-                                    alt="Logo UNWAHA"
-                                    className="w-12 h-12 object-cover rounded-full ring-2 ring-blue-primary/30 group-hover:ring-blue-primary/60 transition-all duration-300"
-                                    onError={(e) => { e.target.style.display = 'none' }}
+                                    src="/logo-kanagara.jpg"
+                                    alt="Logo Kabinet Kanagara UNWAHA"
+                                    className="w-10 h-10 object-contain rounded-full border border-amber-200 shadow-sm bg-slate-900"
                                 />
-                                <div className="absolute inset-0 rounded-full bg-blue-primary/20 blur-md group-hover:bg-blue-primary/40 transition-all duration-300"></div>
                             </div>
-                            <span className="text-2xl font-black gradient-text tracking-tight">BEM UNWAHA</span>
+                            <div>
+                                <div className="font-extrabold text-lg text-slate-900 leading-tight group-hover:text-amber-600 transition">
+                                    BEM UNWAHA
+                                </div>
+                                <div className="text-[11px] text-amber-700 font-bold">
+                                    Kabinet Kanagara
+                                </div>
+                            </div>
+                        </a>
+
+                        {/* Desktop Navigation Links */}
+                        <nav className="hidden lg:flex items-center gap-1 font-medium text-sm text-slate-600">
+                            <a href="#home" className="px-3.5 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Beranda</a>
+                            <a href="#layanan" className="px-3.5 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Layanan Mahasiswa</a>
+                            <a href="#pengumuman" className="px-3.5 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Pengumuman & Agenda</a>
+                            <a href="#proker" className="px-3.5 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Program Kerja</a>
+                            <a href="#profil" className="px-3.5 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Profil & Visi Misi</a>
+                            <a href="#galeri" className="px-3.5 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Galeri</a>
+                        </nav>
+
+                        {/* Action CTA Button */}
+                        <div className="hidden lg:flex items-center gap-3">
+                            <a
+                                href="#layanan"
+                                className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm hover:shadow transition"
+                            >
+                                <Compass className="w-4 h-4" />
+                                <span>Portal Layanan</span>
+                            </a>
                         </div>
 
-                        {/* Desktop Navigation with Animated Underlines */}
-                        <div className="hidden md:flex items-center gap-1">
-                            {[
-                                { href: '#home', label: 'Home' },
-                                { href: '#profil', label: 'Profil' },
-                                { href: '#pengumuman', label: 'Pengumuman' },
-                                { href: '#proker', label: 'Proker' },
-                                { href: '#galeri', label: 'Galeri' },
-                                { href: '#sosmed', label: 'Sosmed' }
-                            ].map((link) => (
-                                <a
-                                    key={link.href}
-                                    href={link.href}
-                                    className="nav-link relative px-5 py-2 text-slate-300 font-medium hover:text-white transition-colors duration-300 group"
-                                >
-                                    {link.label}
-                                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-primary to-cyan-accent group-hover:w-full transition-all duration-300 ease-out"></span>
-                                </a>
-                            ))}
-                        </div>
-
-                        {/* Mobile Menu Button with Animation */}
+                        {/* Mobile Menu Toggle */}
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="md:hidden relative w-10 h-10 rounded-lg bg-dark-card/50 backdrop-blur-sm border border-dark-border/50 flex items-center justify-center text-slate-300 hover:text-blue-primary hover:border-blue-primary/50 transition-all duration-300 hover:scale-110"
+                            className="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition"
+                            aria-label="Toggle Navigation Menu"
                         >
-                            <div className="relative w-6 h-6">
-                                <X
-                                    size={24}
-                                    className={`absolute inset-0 transition-all duration-300 ${mobileMenuOpen ? 'rotate-0 opacity-100' : 'rotate-90 opacity-0'
-                                        }`}
-                                />
-                                <Menu
-                                    size={24}
-                                    className={`absolute inset-0 transition-all duration-300 ${mobileMenuOpen ? '-rotate-90 opacity-0' : 'rotate-0 opacity-100'
-                                        }`}
-                                />
-                            </div>
+                            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                         </button>
                     </div>
 
-                    {/* Mobile Menu with Slide Animation */}
-                    <div
-                        className={`md:hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                            }`}
-                        style={{
-                            overflowY: mobileMenuOpen ? 'auto' : 'hidden',
-                            overflowX: 'hidden'
-                        }}
-                    >
-                        <div className="py-4 space-y-1">
+                    {/* Mobile Dropdown Menu */}
+                    {mobileMenuOpen && (
+                        <div className="lg:hidden pt-4 pb-3 border-t border-slate-100 mt-3 space-y-1">
                             {[
-                                { href: '#home', label: 'Home' },
-                                { href: '#profil', label: 'Profil' },
-                                { href: '#pengumuman', label: 'Pengumuman' },
-                                { href: '#proker', label: 'Proker' },
+                                { href: '#home', label: 'Beranda' },
+                                { href: '#layanan', label: 'Layanan Mahasiswa' },
+                                { href: '#pengumuman', label: 'Pengumuman & Agenda' },
+                                { href: '#proker', label: 'Program Kerja' },
+                                { href: '#profil', label: 'Profil & Visi Misi' },
                                 { href: '#galeri', label: 'Galeri' },
-                                { href: '#sosmed', label: 'Sosmed' }
-                            ].map((link, index) => (
+                                { href: '#kontak', label: 'Kontak Kami' },
+                            ].map((item) => (
                                 <a
-                                    key={link.href}
-                                    href={link.href}
+                                    key={item.href}
+                                    href={item.href}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="block px-4 py-3 text-slate-300 font-medium hover:text-white hover:bg-gradient-to-r hover:from-blue-primary/10 hover:to-cyan-accent/10 rounded-lg transition-all duration-300 border border-transparent hover:border-blue-primary/30"
-                                    style={{
-                                        animation: mobileMenuOpen ? `slideIn 0.3s ease-out ${index * 0.1}s both` : 'none'
-                                    }}
+                                    className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50"
                                 >
-                                    {link.label}
+                                    {item.label}
                                 </a>
                             ))}
+                            <div className="pt-2">
+                                <a
+                                    href="https://wa.me/6283839976681"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full text-center block py-2.5 px-4 bg-blue-600 text-white rounded-lg font-bold text-sm"
+                                >
+                                    Hubungi BEM UNWAHA
+                                </a>
+                            </div>
                         </div>
+                    )}
+                </div>
+            </header>
+
+            {/* HERO SECTION (Clean White Background with Subtle Mesh Pattern, like BEM Unsoed Kausa Cipta) */}
+            <section id="home" className="relative bg-white border-b border-slate-200/80 overflow-hidden pt-12 pb-16 md:py-20">
+                <div className="absolute inset-0 bg-hero-mesh pointer-events-none" />
+                <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        
+                        {/* Left Column: Headline & Action */}
+                        <div className="lg:col-span-7 space-y-6">
+                            
+                            {/* Pill Badge */}
+                            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-bold tracking-wide">
+                                <Sparkle className="w-3.5 h-3.5 fill-blue-600 text-blue-600" />
+                                <span>Keluarga Besar Mahasiswa UNWAHA 2025/2026</span>
+                            </div>
+
+                            {/* Main Title */}
+                            <div>
+                                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+                                    Badan Eksekutif Mahasiswa <br />
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+                                        Universitas KH. A. Wahab Hasbullah
+                                    </span>
+                                </h1>
+                                <p className="mt-2 text-xl font-bold text-slate-800">
+                                    Kabinet <span className="text-amber-600">Kanagara</span>
+                                </p>
+                            </div>
+
+                            {/* Description */}
+                            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl font-normal">
+                                Mewadahi aspirasi, menghadirkan inovasi, dan membangun kolaborasi mahasiswa UNWAHA melalui gerakan yang progresif, religius, dan berdampak nyata bagi almamater dan masyarakat.
+                            </p>
+
+                            {/* Action Buttons */}
+                            <div className="flex flex-wrap items-center gap-3 pt-2">
+                                <a
+                                    href="#layanan"
+                                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all"
+                                >
+                                    <span>Jelajahi Layanan Mahasiswa</span>
+                                    <ArrowRight className="w-4 h-4" />
+                                </a>
+                                <a
+                                    href="#profil"
+                                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm border border-slate-200 transition"
+                                >
+                                    <span>Profil & Visi Misi</span>
+                                </a>
+                            </div>
+
+                            {/* Tagline Box Quote */}
+                            <div className="pt-4 border-t border-slate-100 flex items-center gap-3 text-xs text-slate-500 italic">
+                                <span className="font-semibold text-slate-700 not-italic">Motto Kabinet:</span>
+                                &ldquo;Inovatif, Aspiratif, dan Religius — Merajut Sinergi, Wujudkan Aksi Nyata&rdquo;
+                            </div>
+                        </div>
+
+                        {/* Right Column: Hero Visual Card (Modern Clean Portal Frame) */}
+                        <div className="lg:col-span-5 flex justify-center">
+                            <div className="w-full max-w-md bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-xl relative overflow-hidden text-center">
+                                
+                                {/* Card Top Status Bar */}
+                                <div className="flex items-center justify-between gap-2 pb-4 mb-5 border-b border-slate-100 text-xs">
+                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-bold border border-emerald-200/80 text-[11px]">
+                                        <CheckCircle className="w-3.5 h-3.5" />
+                                        <span>Aktif & Terverifikasi</span>
+                                    </span>
+                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 font-bold border border-blue-200/80 text-[11px]">
+                                        <Shield className="w-3.5 h-3.5 text-blue-600" />
+                                        <span>Periode 2025 / 2026</span>
+                                    </span>
+                                </div>
+
+                                {/* Logo & Titles */}
+                                <div className="w-24 h-24 mx-auto mb-4 rounded-full p-1.5 bg-gradient-to-tr from-amber-500 via-amber-400 to-yellow-500 shadow-md flex items-center justify-center">
+                                    <img
+                                        src="/logo-kanagara.jpg"
+                                        alt="Logo Kabinet Kanagara BEM UNWAHA"
+                                        className="w-full h-full object-contain rounded-full border-2 border-white bg-slate-900"
+                                    />
+                                </div>
+                                <h3 className="text-xl font-extrabold text-slate-900 leading-tight">
+                                    BEM UNWAHA
+                                </h3>
+                                <p className="text-xs font-bold text-amber-600 uppercase tracking-wider mt-0.5 mb-3">
+                                    Kabinet Kanagara
+                                </p>
+                                <p className="text-xs text-slate-500 leading-relaxed mb-5 px-2">
+                                    Pusat koordinasi dan pengembangan potensi mahasiswa Universitas KH. A. Wahab Hasbullah Jombang.
+                                </p>
+
+                                {/* 4-Cell Information Grid */}
+                                <div className="grid grid-cols-2 gap-2 text-left pt-2 border-t border-slate-100">
+                                    <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
+                                        <div className="text-[10px] text-slate-400 font-bold uppercase">Periode Khidmat</div>
+                                        <div className="text-xs font-bold text-slate-800 mt-0.5">2025 / 2026</div>
+                                    </div>
+                                    <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
+                                        <div className="text-[10px] text-slate-400 font-bold uppercase">Struktur Ormawa</div>
+                                        <div className="text-xs font-bold text-slate-800 mt-0.5">12 Kementerian</div>
+                                    </div>
+                                    <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
+                                        <div className="text-[10px] text-slate-400 font-bold uppercase">Nilai Gerak</div>
+                                        <div className="text-xs font-bold text-slate-800 mt-0.5">Religius & Inovatif</div>
+                                    </div>
+                                    <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
+                                        <div className="text-[10px] text-slate-400 font-bold uppercase">Basis Kampus</div>
+                                        <div className="text-xs font-bold text-slate-800 mt-0.5 truncate">Tambakberas Jbg</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-            </nav>
 
-            {/* Hero Section */}
-            <section id="home" className="relative min-h-screen flex items-center justify-center pt-16 px-4">
-                <div
-                    className="max-w-5xl mx-auto text-center relative z-10"
-                    style={{ transform: `translateY(${scrollY * 0.15}px)` }}
-                >
-                    <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
-                        BEM UNWAHA <br />
-                        <span
-                            className="relative inline-block py-4 cursor-pointer group"
-                            onMouseMove={(e) => {
-                                const rect = e.currentTarget.getBoundingClientRect();
-                                const x = e.clientX - rect.left;
-                                const y = e.clientY - rect.top;
-                                e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
-                                e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
-                            }}
-                        >
-                            {/* Subtle Base Glow */}
-                            <span className="absolute inset-0 blur-[40px] bg-gradient-to-r from-blue-600/15 via-cyan-500/20 to-blue-600/15 scale-110"></span>
-
-                            {/* Primary Spotlight - Follows Mouse Smoothly */}
-                            <span
-                                className="absolute w-80 h-80 rounded-full blur-[100px] bg-blue-500/25 pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"
-                                style={{
-                                    left: 'var(--mouse-x, 50%)',
-                                    top: 'var(--mouse-y, 50%)',
-                                    transform: 'translate(-50%, -50%)',
-                                    transition: 'left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), top 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease-out'
-                                }}
-                            ></span>
-
-                            {/* Secondary Spotlight - Faster, Smoother */}
-                            <span
-                                className="absolute w-48 h-48 rounded-full blur-[60px] bg-cyan-400/30 pointer-events-none opacity-0 group-hover:opacity-100"
-                                style={{
-                                    left: 'var(--mouse-x, 50%)',
-                                    top: 'var(--mouse-y, 50%)',
-                                    transform: 'translate(-50%, -50%)',
-                                    transition: 'left 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease-out'
-                                }}
-                            ></span>
-
-                            {/* Animated Ring 1 - Smooth Expansion */}
-                            <span
-                                className="absolute w-32 h-32 rounded-full border-2 border-blue-400/20 pointer-events-none opacity-0 group-hover:opacity-100 group-hover:scale-150"
-                                style={{
-                                    left: 'var(--mouse-x, 50%)',
-                                    top: 'var(--mouse-y, 50%)',
-                                    transform: 'translate(-50%, -50%)',
-                                    transition: 'left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out, transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)'
-                                }}
-                            ></span>
-
-                            {/* Animated Ring 2 - Slower, Smoother Expansion */}
-                            <span
-                                className="absolute w-24 h-24 rounded-full border border-cyan-300/30 pointer-events-none opacity-0 group-hover:opacity-100 group-hover:scale-[2]"
-                                style={{
-                                    left: 'var(--mouse-x, 50%)',
-                                    top: 'var(--mouse-y, 50%)',
-                                    transform: 'translate(-50%, -50%)',
-                                    transition: 'left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease-out, transform 1s cubic-bezier(0.34, 1.56, 0.64, 1)'
-                                }}
-                            ></span>
-
-                            {/* Particle Effect 1 - Smooth Float */}
-                            <span
-                                className="absolute w-3 h-3 rounded-full bg-blue-400/40 blur-sm pointer-events-none opacity-0 group-hover:opacity-100"
-                                style={{
-                                    left: 'var(--mouse-x, 50%)',
-                                    top: 'var(--mouse-y, 50%)',
-                                    transform: 'translate(-50%, -50%) translate(-20px, -20px)',
-                                    transition: 'left 0.15s ease-out, top 0.15s ease-out, opacity 0.2s ease-out'
-                                }}
-                            ></span>
-
-                            {/* Particle Effect 2 - Smooth Float */}
-                            <span
-                                className="absolute w-2 h-2 rounded-full bg-cyan-300/50 blur-sm pointer-events-none opacity-0 group-hover:opacity-100"
-                                style={{
-                                    left: 'var(--mouse-x, 50%)',
-                                    top: 'var(--mouse-y, 50%)',
-                                    transform: 'translate(-50%, -50%) translate(25px, -15px)',
-                                    transition: 'left 0.2s ease-out, top 0.2s ease-out, opacity 0.3s ease-out'
-                                }}
-                            ></span>
-
-                            {/* Particle Effect 3 - Smooth Float */}
-                            <span
-                                className="absolute w-2 h-2 rounded-full bg-blue-300/40 blur-sm pointer-events-none opacity-0 group-hover:opacity-100"
-                                style={{
-                                    left: 'var(--mouse-x, 50%)',
-                                    top: 'var(--mouse-y, 50%)',
-                                    transform: 'translate(-50%, -50%) translate(-15px, 20px)',
-                                    transition: 'left 0.25s ease-out, top 0.25s ease-out, opacity 0.4s ease-out'
-                                }}
-                            ></span>
-
-                            {/* Gradient Text with subtle shadow */}
-                            <span className="gradient-text relative drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">
-                                Kabinet Sinergi Perubahan
-                            </span>
-                        </span>
-                    </h1>
-                    <p
-                        className="text-xl md:text-2xl text-slate-400 mb-8 max-w-3xl mx-auto font-light"
-                        style={{ transform: `translateY(${scrollY * 0.1}px)` }}
-                    >
-                        Membangun ekosistem mahasiswa yang inovatif, aspiratif, dan berdampak nyata untuk kemajuan kampus dan masyarakat
-                    </p>
-                    <div
-                        className="flex flex-col sm:flex-row gap-4 justify-center"
-                        style={{ transform: `translateY(${scrollY * 0.05}px)` }}
-                    >
-                        <a
-                            href="#proker"
-                            className="px-8 py-4 bg-gradient-to-r from-blue-primary to-cyan-accent text-white font-semibold rounded-full hover:shadow-glow-blue transition-all duration-300 hover:scale-105"
-                        >
-                            Lihat Program Kami
-                        </a>
-                        <a
-                            href="#sosmed"
-                            className="px-8 py-4 glass-card border-blue-primary/30 font-semibold rounded-full hover:border-blue-primary/70 transition-all duration-300 hover:scale-105"
-                        >
-                            Hubungi Kami
-                        </a>
+                {/* Bottom Quick Stats Row (Clean White Bar with Dividers) */}
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 md:mt-16">
+                    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-slate-100 p-4 sm:p-6">
+                        {[
+                            { value: '12', label: 'Kementerian Aktif', sub: 'Bidang pengabdian' },
+                            { value: '15+', label: 'Program Kerja', sub: 'Inovasi berkelanjutan' },
+                            { value: '45', label: 'Pengurus BEM', sub: 'Keluarga mahasiswa' },
+                            { value: '3.500+', label: 'Mahasiswa UNWAHA', sub: 'Civitas akademika' },
+                        ].map((stat, idx) => (
+                            <div key={idx} className="p-3 sm:p-4 text-center">
+                                <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-blue-600 tracking-tight">
+                                    {stat.value}
+                                </div>
+                                <div className="text-xs sm:text-sm font-bold text-slate-800 mt-1">
+                                    {stat.label}
+                                </div>
+                                <div className="text-[11px] text-slate-400">
+                                    {stat.sub}
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* Statistics Quick Grid */}
-            <section className="py-16 px-4 relative z-10">
-                <div className="max-w-7xl mx-auto">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        {[
-                            { number: '12', label: 'Kementerian', icon: Award },
-                            { number: '40+', label: 'Program Kerja', icon: Target },
-                            { number: '150+', label: 'Pengurus', icon: Users },
-                            { number: '5000+', label: 'Mahasiswa', icon: Sparkles },
-                        ].map((stat, index) => {
-                            const [ref, isInView] = useInView()
+            {/* LAYANAN MAHASISWA (App Grid / Service Showcase, like apps.bem-unsoed.com) */}
+            <section id="layanan" className="py-16 md:py-20 bg-slate-50 border-b border-slate-200/80">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    {/* Section Header */}
+                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                        <div>
+                            <div className="inline-flex items-center gap-1.5 text-blue-600 text-xs font-extrabold uppercase tracking-wider mb-2">
+                                <Layers className="w-3.5 h-3.5" />
+                                <span>Pusat Layanan Terpadu</span>
+                            </div>
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+                                Layanan Mahasiswa BEM UNWAHA
+                            </h2>
+                            <p className="text-slate-500 text-sm sm:text-base max-w-2xl mt-1">
+                                Akses cepat berbagai layanan advokasi, administrasi, agenda kampus, dan ruang pengembangan potensi mahasiswa.
+                            </p>
+                        </div>
+                        <div className="text-xs text-slate-400">
+                            Terbuka untuk seluruh civitas UNWAHA
+                        </div>
+                    </div>
+
+                    {/* Quick App Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {quickServices.map((service) => {
+                            const Icon = service.icon
                             return (
                                 <div
-                                    key={index}
-                                    ref={ref}
-                                    className={`glass-card p-6 text-center group hover:border-blue-primary/50 transition-all duration-300 ${isInView ? 'animate-fade-in-up' : 'opacity-0'}`}
-                                    style={{ animationDelay: `${index * 0.1}s` }}
+                                    key={service.id}
+                                    className="portal-card p-6 flex flex-col justify-between"
                                 >
-                                    <stat.icon className="w-8 h-8 mx-auto mb-3 text-blue-primary" />
-                                    <div className="text-4xl md:text-5xl font-black gradient-text mb-2">{stat.number}</div>
-                                    <div className="text-slate-400 text-sm md:text-base">{stat.label}</div>
+                                    <div>
+                                        <div className="flex items-center justify-between mb-4">
+                                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${service.iconBg} shadow-sm`}>
+                                                <Icon className="w-6 h-6" />
+                                            </div>
+                                            <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full border ${service.badgeColor}`}>
+                                                {service.badge}
+                                            </span>
+                                        </div>
+                                        <h3 className="text-lg font-bold text-slate-900 mb-2">
+                                            {service.title}
+                                        </h3>
+                                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6">
+                                            {service.desc}
+                                        </p>
+                                    </div>
+                                    <a
+                                        href={service.link}
+                                        target={service.link.startsWith('http') ? '_blank' : '_self'}
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center justify-between w-full py-2.5 px-4 rounded-xl bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-700 font-bold text-xs border border-slate-200 hover:border-blue-200 transition"
+                                    >
+                                        <span>{service.btnText}</span>
+                                        <ChevronRight className="w-4 h-4" />
+                                    </a>
                                 </div>
                             )
                         })}
@@ -418,718 +606,688 @@ function App() {
                 </div>
             </section>
 
-            {/* Visi & Misi Section */}
-            <section id="profil" className="py-20 px-4 relative z-10">
-                <div className="max-w-6xl mx-auto">
-                    <h2 className="text-4xl md:text-5xl font-black text-center mb-4">
-                        <span className="gradient-text">Visi & Misi</span>
-                    </h2>
-                    <p className="text-center text-slate-400 mb-12 max-w-2xl mx-auto">
-                        Fondasi kami dalam membangun organisasi yang berdampak
-                    </p>
-
-                    <div className="grid md:grid-cols-2 gap-8">
-                        {/* Visi Card */}
-                        {(() => {
-                            const [ref, isInView] = useInView()
-                            return (
-                                <div
-                                    ref={ref}
-                                    className={`glass-card p-8 group hover:border-blue-primary/50 transition-all duration-300 ${isInView ? 'animate-fade-in-left' : 'opacity-0'}`}
-                                >
-                                    <div className="flex items-center gap-3 mb-6">
-                                        <div className="w-12 h-12 rounded-full bg-blue-primary/20 flex items-center justify-center">
-                                            <Lightbulb className="w-6 h-6 text-blue-primary" />
-                                        </div>
-                                        <h3 className="text-2xl font-bold">Visi</h3>
-                                    </div>
-                                    <p className="text-slate-300 leading-relaxed">
-                                        Mewujudkan BEM UNWAHA sebagai organisasi mahasiswa yang inovatif, aspiratif, dan religius dalam mengembangkan potensi mahasiswa serta berkontribusi nyata bagi kampus dan masyarakat.
-                                    </p>
-                                </div>
-                            )
-                        })()}
-
-                        {/* Misi Card */}
-                        {(() => {
-                            const [ref, isInView] = useInView()
-                            return (
-                                <div
-                                    ref={ref}
-                                    className={`glass-card p-8 group hover:border-blue-primary/50 transition-all duration-300 ${isInView ? 'animate-fade-in-right' : 'opacity-0'}`}
-                                >
-                                    <div className="flex items-center gap-3 mb-6">
-                                        <div className="w-12 h-12 rounded-full bg-cyan-accent/20 flex items-center justify-center">
-                                            <Target className="w-6 h-6 text-cyan-accent" />
-                                        </div>
-                                        <h3 className="text-2xl font-bold">Misi</h3>
-                                    </div>
-                                    <ul className="space-y-3">
-                                        {[
-                                            'Menyelenggarakan program kerja yang inovatif dan bermanfaat',
-                                            'Menjadi wadah aspirasi mahasiswa yang responsif dan solutif',
-                                            'Memperkuat nilai-nilai keislaman dalam setiap kegiatan',
-                                            'Membangun sinergi dengan seluruh elemen kampus',
-                                        ].map((item, index) => (
-                                            <li key={index} className="flex items-start gap-3 text-slate-300">
-                                                <CheckCircle className="w-5 h-5 text-blue-primary flex-shrink-0 mt-0.5" />
-                                                <span>{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )
-                        })()}
-                    </div>
-                </div>
-            </section>
-
-            {/* Papan Pengumuman Section */}
-            <section id="pengumuman" className="py-20 px-4 relative z-10">
-                <div className="max-w-7xl mx-auto">
-                    {/* Header */}
-                    <div className="text-center mb-12">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-primary/10 border border-blue-primary/30 text-blue-primary text-sm font-semibold mb-4 animate-pulse">
-                            <Megaphone className="w-4 h-4" /> Info Terkini BEM
+            {/* PAPAN PENGUMUMAN & AGENDA RESMI (With the HUT RI 81 poster, Muktamar LESBUMI, & Seminar Nasional) */}
+            <section id="pengumuman" className="py-16 md:py-20 bg-white border-b border-slate-200/80">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    {/* Section Header */}
+                    <div className="text-center max-w-3xl mx-auto mb-14">
+                        <div className="inline-flex items-center gap-1.5 text-blue-600 text-xs font-extrabold uppercase tracking-wider mb-2">
+                            <Megaphone className="w-3.5 h-3.5" />
+                            <span>Informasi & Pengumuman Resmi</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-black mb-4">
-                            <span className="gradient-text">Papan Pengumuman</span>
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+                            Agenda & Berita Terkini BEM
                         </h2>
-                        <p className="text-slate-400 max-w-2xl mx-auto font-light text-base md:text-lg">
-                            Daftarkan dirimu dan ikuti program unggulan kami untuk upgrade skill dan value diri Anda!
+                        <p className="text-slate-500 text-sm sm:text-base mt-2">
+                            Pantau informasi terbaru, kegiatan kenegaraan, serta agenda seminar bersertifikat nasional.
                         </p>
                     </div>
 
-                    {/* Top Featured Grid: Ucapan Hari Besar & Seminar Nasional */}
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-                        {/* Himbauan Muktamar Kebudayaan Indonesia LESBUMI PBNU 2026 */}
-                        <div className="lg:col-span-1 border border-emerald-600/30 bg-gradient-to-b from-emerald-950/20 via-dark-card to-dark-card rounded-3xl p-6 shadow-[0_0_40px_rgba(16,185,129,0.1)] relative overflow-hidden group hover:border-emerald-600/50 hover:shadow-[0_0_50px_rgba(16,185,129,0.25)] transition-all duration-500 flex flex-col justify-between">
-                            {/* Animated emerald glow inside */}
-                            <div className="absolute -top-10 -left-10 w-40 h-40 bg-emerald-600/10 rounded-full blur-[60px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
+                    {/* FEATURED: HUT RI KE-81 OFFICIAL POSTER SHOWCASE CARD */}
+                    <div className="mb-12 bg-gradient-to-br from-red-50 via-white to-rose-50 border-2 border-red-200/80 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm overflow-hidden relative">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                             
-                            <div>
-                                {/* Card Header */}
-                                <div className="flex items-center justify-between mb-6">
-                                    <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
-                                        📢 Himbauan Resmi
-                                    </span>
-                                    <span className="text-xs text-slate-500 font-semibold">11 Juni 2026</span>
-                                </div>
-
-                                {/* Title */}
-                                <div className="mb-4">
-                                    <h3 className="text-2xl font-black text-white leading-tight tracking-tight">
-                                        Muktamar Kebudayaan <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-amber-300">LESBUMI 2026</span>
-                                    </h3>
-                                    <div className="h-1 w-20 bg-gradient-to-r from-emerald-600 to-amber-400 rounded mt-2"></div>
-                                </div>
-
-                                {/* Body Text */}
-                                <div className="space-y-3 text-slate-300 text-xs md:text-sm leading-relaxed mb-6">
-                                    <p className="font-semibold text-slate-200 italic border-l-2 border-emerald-500 pl-3">
-                                        &ldquo;Himbauan kepada seluruh civitas akademika UNWAHA (Dosen, Tendik, & Mahasiswa) untuk hadir dan memeriahkan Muktamar Kebudayaan Indonesia.&rdquo;
-                                    </p>
-                                    <div className="bg-dark-bg/60 border border-slate-800/80 rounded-xl p-3 space-y-2 mt-2">
-                                        <div className="flex items-start gap-2 text-xs">
-                                            <span className="text-amber-400">📍</span>
-                                            <span>Universitas KH. A. Wahab Hasbullah (UNWAHA)</span>
-                                        </div>
-                                        <div className="flex items-center gap-2 text-xs">
-                                            <span className="text-amber-400">📅</span>
-                                            <span>12–14 Juni 2026</span>
-                                        </div>
-                                        <div className="flex items-center gap-2 text-xs">
-                                            <span className="text-amber-400">🏷️</span>
-                                            <span>Tema: &ldquo;Kembali ke Akar&rdquo;</span>
-                                        </div>
-                                    </div>
-                                    <p className="text-slate-400 text-xs leading-relaxed">
-                                        Mari bersama menjadi tuan rumah yang baik, tunjukkan semangat kebersamaan, dan sambut tamu muktamar dengan penuh keramahan.
-                                    </p>
-                                </div>
-
-                                {/* Quote */}
-                                <div className="p-3 bg-emerald-950/20 border border-emerald-500/20 rounded-xl mb-6">
-                                    <p className="text-[11px] md:text-xs text-emerald-400 font-bold leading-relaxed">
-                                        ✨ Bersama kita sukseskan forum kebudayaan nasional dan kokohkan UNWAHA sebagai pusat tradisi & kebudayaan Nusantara!
-                                    </p>
+                            {/* Poster Image */}
+                            <div className="lg:col-span-5 flex justify-center">
+                                <div className="max-w-xs sm:max-w-sm w-full rounded-2xl overflow-hidden shadow-lg border-2 border-red-300 bg-white">
+                                    <img
+                                        src="/hut-ri-81.jpg"
+                                        alt="Poster Resmi Dirgahayu Republik Indonesia Ke-81 BEM UNWAHA"
+                                        className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                                    />
                                 </div>
                             </div>
 
-                            {/* Card Footer */}
-                            <div className="border-t border-slate-800/80 pt-4 mt-auto">
-                                <div className="text-[11px] font-bold text-slate-400 mb-3 tracking-wide">
-                                    BEM Universitas KH. A. Wahab Hasbullah
+                            {/* Copywriting & Text */}
+                            <div className="lg:col-span-7 space-y-4">
+                                <div className="flex flex-wrap items-center gap-2">
+                                    <span className="px-3 py-1 rounded-full bg-red-600 text-white font-black text-xs uppercase tracking-wider">
+                                        🇮🇩 DIRGAHAYU REPUBLIK INDONESIA
+                                    </span>
+                                    <span className="px-3 py-1 rounded-full bg-red-100 text-red-800 font-bold text-xs">
+                                        17 Agustus 1945 – 17 Agustus 2026
+                                    </span>
                                 </div>
-                                <div className="flex flex-wrap gap-1.5">
-                                    {['#LESBUMI2026', '#UNWAHA', '#MuktamarKebudayaan', '#KembaliKeAkar'].map((tag) => (
-                                        <span key={tag} className="text-[10px] px-2 py-0.5 rounded bg-slate-800/50 text-slate-400 border border-slate-700/30 font-semibold">
+
+                                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight">
+                                    Dirgahayu Republik Indonesia <span className="text-red-600">Ke-81</span>
+                                </h3>
+
+                                <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+                                    81 tahun Indonesia merdeka, 81 tahun semangat juang tak pernah padam. Mari jadikan momen kemerdekaan ini sebagai pengingat untuk terus berkarya, berkontribusi, dan menjaga persatuan demi Indonesia yang lebih maju.
+                                </p>
+
+                                <p className="text-slate-800 font-semibold text-sm">
+                                    Merdeka bukan sekadar perayaan, tetapi semangat untuk terus mengabdi dan menginspirasi. ❤️🤍
+                                </p>
+
+                                {/* Quote Box */}
+                                <div className="p-4 rounded-xl bg-white border border-red-200 shadow-sm">
+                                    <p className="text-red-700 font-bold text-sm sm:text-base italic">
+                                        &ldquo;Bersatu, Berdaulat, Rakyat Sejahtera, Indonesia Maju.&rdquo; 🇮🇩✨
+                                    </p>
+                                </div>
+
+                                {/* Hashtags */}
+                                <div className="flex flex-wrap gap-2 pt-2">
+                                    {['#DirgahayuRI81', '#IndonesiaMerdeka', '#BEMUNWAHA', '#kabinetkanagara', '#BanggaIndonesia'].map((tag) => (
+                                        <span key={tag} className="text-xs px-3 py-1 rounded-full bg-red-50 text-red-700 border border-red-200 font-medium">
                                             {tag}
                                         </span>
                                     ))}
                                 </div>
                             </div>
                         </div>
-
-                        {/* Featured Billboard Card: SEMINAR NASIONAL BERSERTIFIKAT 2026 */}
-                        <div className="lg:col-span-2 border border-red-500/30 bg-gradient-to-br from-red-950/20 via-dark-card to-red-950/20 rounded-3xl p-6 md:p-8 shadow-[0_0_50px_rgba(239,68,68,0.1)] relative overflow-hidden group hover:border-red-500/50 transition-all duration-500 flex flex-col justify-between">
-                            {/* Animated gradient light rays */}
-                            <div className="absolute top-0 right-0 w-80 h-80 bg-red-600/10 rounded-full blur-[100px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
-                            <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-orange-600/10 rounded-full blur-[100px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
-
-                            <div>
-                                {/* Top banner tag */}
-                                <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-                                    <div className="flex items-center gap-2 flex-wrap">
-                                        <span className="px-3 py-1 bg-gradient-to-r from-red-600 to-orange-500 text-white text-[10px] font-black rounded-full uppercase tracking-wider animate-bounce shadow-glow-red">
-                                            LIMITED OFFER
-                                        </span>
-                                        <span className="flex items-center gap-1.5 text-orange-400 text-xs font-bold bg-orange-950/40 border border-orange-500/30 px-2.5 py-0.5 rounded-full">
-                                            ⚡ Kuota SUPER TERBATAS
-                                        </span>
-                                        <span className="flex items-center gap-1.5 text-red-400 text-xs font-bold bg-red-950/40 border border-red-500/30 px-2.5 py-0.5 rounded-full">
-                                            🔥 Selalu SOLD OUT!
-                                        </span>
-                                    </div>
-                                    <div className="text-right">
-                                        <span className="text-xl md:text-2xl font-black text-red-500 tracking-tight animate-pulse drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]">
-                                            100% GRATIS!
-                                        </span>
-                                    </div>
-                                </div>
-
-                                {/* Headline */}
-                                <div className="mb-6">
-                                    <h3 className="text-2xl md:text-4xl font-black text-white leading-tight mb-2 tracking-wide">
-                                        SEMINAR NASIONAL BERSERTIFIKAT 2026
-                                    </h3>
-                                    <p className="text-sm md:text-base text-slate-300 font-bold">
-                                        🎓 6 TOPIK PILIHAN | TANPA BIAYA | E-SERTIFIKAT NASIONAL
-                                    </p>
-                                </div>
-
-                                <div className="grid md:grid-cols-2 gap-6 items-center border-t border-slate-800/80 pt-4">
-                                    {/* Copywriting */}
-                                    <div className="space-y-3">
-                                        <div className="p-3 bg-dark-bg/60 rounded-xl border border-slate-800">
-                                            <p className="text-slate-300 leading-relaxed text-xs italic">
-                                                &ldquo;Baca baik-baik ya… Kesempatan seperti ini tidak datang dua kali. Banyak peserta kami sebelumnya berkata: <span className="text-red-400 font-semibold">&apos;Kak, nyesel telat daftar… kuotanya sudah habis!&apos; 😭</span> Dan faktanya: <span className="text-orange-400 font-semibold">Setiap seminar SOLD OUT dalam hitungan jam.</span>&rdquo;
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    {/* Bullet points & CTA */}
-                                    <div className="space-y-3">
-                                        <ul className="grid grid-cols-2 gap-1.5 text-xs text-slate-300">
-                                            <li className="flex items-center gap-1.5">
-                                                <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                                                <span>Upgrade Skill</span>
-                                            </li>
-                                            <li className="flex items-center gap-1.5">
-                                                <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                                                <span>Menambah Value CV</span>
-                                            </li>
-                                            <li className="flex items-center gap-1.5">
-                                                <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                                                <span>Persiapan Karier</span>
-                                            </li>
-                                            <li className="flex items-center gap-1.5">
-                                                <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                                                <span>Bisnis Era Digital</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="p-3 bg-emerald-950/20 border border-emerald-500/20 rounded-xl text-xs text-emerald-400 flex items-center gap-2 mt-6">
-                                <AlertTriangle className="w-4 h-4 flex-shrink-0 text-emerald-400" />
-                                <span><strong>PENTING:</strong> JOIN GRUP WA = RESMI TERDAFTAR ✅</span>
-                            </div>
-                        </div>
                     </div>
 
-                    {/* Seminars Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                        {seminars.map((sem) => {
-                            const [cardRef, cardInView] = useInView()
-                            return (
-                                <div
-                                    key={sem.id}
-                                    ref={cardRef}
-                                    className={`glass-card p-6 flex flex-col justify-between transition-all duration-300 relative overflow-hidden group ${sem.borderGlow} ${cardInView ? 'animate-fade-in-up' : 'opacity-0'}`}
-                                    style={{ animationDelay: `${sem.id * 0.05}s` }}
+                    {/* TWO COLUMNS: Muktamar LESBUMI & Seminar Nasional Banner */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+                        
+                        {/* Muktamar LESBUMI Card */}
+                        <div className="lg:col-span-5 bg-emerald-950 text-white rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
+                            <div>
+                                <div className="flex items-center justify-between mb-4">
+                                    <span className="px-3 py-1 rounded-full bg-emerald-800 text-emerald-200 text-xs font-bold">
+                                        📢 Himbauan Resmi
+                                    </span>
+                                    <span className="text-emerald-300 text-xs">11 Juni 2026</span>
+                                </div>
+                                <h3 className="text-2xl font-bold mb-2">
+                                    Muktamar Kebudayaan LESBUMI PBNU 2026
+                                </h3>
+                                <p className="text-emerald-200 text-xs sm:text-sm leading-relaxed mb-6">
+                                    Himbauan kepada seluruh civitas akademika UNWAHA (Dosen, Tendik, & Mahasiswa) untuk hadir dan memeriahkan forum kebudayaan nasional bertema &ldquo;Kembali ke Akar&rdquo; di kampus UNWAHA.
+                                </p>
+                                
+                                <div className="space-y-2 bg-emerald-900/60 p-4 rounded-xl text-xs text-emerald-100 border border-emerald-800 mb-6">
+                                    <div>📍 Lokasi: Kampus UNWAHA Jombang</div>
+                                    <div>📅 Waktu: 12 – 14 Juni 2026</div>
+                                    <div>🏷️ Tema: &ldquo;Kembali ke Akar&rdquo;</div>
+                                </div>
+                            </div>
+
+                            <div className="text-xs text-emerald-300 font-medium border-t border-emerald-800 pt-4">
+                                BEM Universitas KH. A. Wahab Hasbullah
+                            </div>
+                        </div>
+
+                        {/* Seminar Nasional Overview Billboard */}
+                        <div className="lg:col-span-7 bg-slate-900 text-white rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-slate-800">
+                            <div>
+                                <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                                    <span className="px-3 py-1 bg-red-600 text-white font-bold text-xs rounded-full uppercase">
+                                        100% GRATIS & BERSERTIFIKAT
+                                    </span>
+                                    <span className="text-amber-400 text-xs font-bold">
+                                        ⚡ Kuota Terbatas
+                                    </span>
+                                </div>
+                                <h3 className="text-2xl sm:text-3xl font-extrabold mb-2 leading-tight">
+                                    Seminar Nasional Bersertifikat 2026
+                                </h3>
+                                <p className="text-slate-300 text-sm mb-6">
+                                    Peningkatan kompetensi mahasiswa melalui 6 rangkaian seminar online bersama narasumber bersertifikasi dan praktisi profesional.
+                                </p>
+
+                                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                                    {[
+                                        { label: 'Public Speaking', sub: 'Topik 01' },
+                                        { label: 'Entrepreneur', sub: 'Topik 02' },
+                                        { label: 'MS Productivity', sub: 'Topik 03' },
+                                        { label: 'Mental Health', sub: 'Topik 04' },
+                                    ].map((item, i) => (
+                                        <div key={i} className="bg-slate-800/80 p-3 rounded-xl border border-slate-700 text-center">
+                                            <div className="text-[10px] text-blue-400 font-bold">{item.sub}</div>
+                                            <div className="text-xs font-bold text-white mt-0.5 truncate">{item.label}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-800">
+                                <span className="text-xs text-emerald-400 flex items-center gap-1.5">
+                                    <CheckCircle className="w-4 h-4" /> Gabung Grup WAG = Resmi Terdaftar
+                                </span>
+                                <a
+                                    href="https://bit.ly/RgSENA"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl inline-flex items-center gap-1.5 transition"
                                 >
-                                    {/* Accent background mesh */}
-                                    <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${sem.color} opacity-[0.03] group-hover:opacity-[0.08] blur-xl rounded-full transition-opacity duration-300`}></div>
+                                    <span>Portal Jadwal Lengkap</span>
+                                    <ArrowRight className="w-3.5 h-3.5" />
+                                </a>
+                            </div>
+                        </div>
 
-                                    <div>
-                                        {/* Card Top / Badge & Title */}
-                                        <div className="flex items-center justify-between mb-4">
-                                            <span className={`text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded bg-slate-800 ${sem.accent}`}>
-                                                Topik {sem.num}
-                                            </span>
-                                            <span className="text-3xl font-black text-slate-700/50 group-hover:text-slate-500/30 transition-colors duration-300">
-                                                #{sem.num}
-                                            </span>
-                                        </div>
+                    </div>
 
-                                        {/* Seminar Title & Tagline */}
-                                        <h4 className="text-lg md:text-xl font-black text-white leading-tight mb-2 tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-300 transition-all">
-                                            {sem.title}
-                                        </h4>
-                                        <p className="text-slate-400 text-xs font-semibold italic border-l-2 border-slate-700 pl-2 py-0.5 mb-6 leading-relaxed">
-                                            &ldquo;{sem.tagline}&rdquo;
-                                        </p>
-
-                                        {/* Speaker Block */}
-                                        <div className="mb-6 p-3 rounded-xl bg-dark-bg/40 border border-dark-border/40 group-hover:border-slate-800 transition-colors duration-300">
-                                            <div className="flex items-start gap-3">
-                                                <div className={`w-8 h-8 rounded-lg ${sem.bgLight} flex items-center justify-center flex-shrink-0 mt-0.5`}>
-                                                    <Users className={`w-4 h-4 ${sem.accent}`} />
-                                                </div>
-                                                <div>
-                                                    <div className="text-xs text-slate-500 uppercase font-bold tracking-wider">Pembicara</div>
-                                                    <div className="text-sm font-bold text-slate-200">{sem.speaker}</div>
-                                                    {sem.role && <div className="text-[11px] text-slate-400 font-medium leading-normal mt-0.5">{sem.role}</div>}
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* Date and Time */}
-                                        <div className="space-y-2 mb-6 text-xs text-slate-400">
-                                            <div className="flex items-center gap-2">
-                                                <Calendar className="w-4 h-4 text-slate-500" />
-                                                <span>{sem.date}</span>
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                <Clock className="w-4 h-4 text-slate-500" />
-                                                <span>{sem.time}</span>
-                                            </div>
-                                        </div>
+                    {/* 6 SEMINAR CARDS GRID (Clean White Card with Color Side Border) */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {seminars.map((sem) => (
+                            <div
+                                key={sem.id}
+                                className={`bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between border-l-4 ${sem.color}`}
+                            >
+                                <div>
+                                    <div className="flex items-center justify-between mb-3">
+                                        <span className={`text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider ${sem.badgeColor}`}>
+                                            {sem.category}
+                                        </span>
+                                        <span className="text-xs font-black text-slate-400">
+                                            #{sem.num}
+                                        </span>
                                     </div>
 
-                                    {/* Action Button */}
-                                    <a
-                                        href={sem.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={`w-full py-3 bg-gradient-to-r ${sem.color} text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all ${sem.shadow} shadow-lg hover:shadow-xl`}
-                                    >
-                                        <MessageCircle className="w-4 h-4" />
-                                        <span>Daftar via Grup WAG</span>
-                                        <ExternalLink className="w-3.5 h-3.5 opacity-60" />
-                                    </a>
+                                    <h4 className="font-extrabold text-base text-slate-900 leading-snug mb-1">
+                                        {sem.title}
+                                    </h4>
+                                    <p className="text-xs text-slate-500 italic mb-4">
+                                        &ldquo;{sem.tagline}&rdquo;
+                                    </p>
+
+                                    {/* Speaker Info */}
+                                    <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
+                                        <div className="text-[10px] text-slate-400 font-bold uppercase">Narasumber</div>
+                                        <div className="text-xs font-bold text-slate-800">{sem.speaker}</div>
+                                        <div className="text-[11px] text-slate-500">{sem.role}</div>
+                                    </div>
+
+                                    {/* Time and Date */}
+                                    <div className="space-y-1 text-xs text-slate-500 mb-6">
+                                        <div className="flex items-center gap-2">
+                                            <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                                            <span>{sem.date}</span>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <Clock className="w-3.5 h-3.5 text-slate-400" />
+                                            <span>{sem.time}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a
+                                    href={sem.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-blue-600 text-white font-bold text-xs flex items-center justify-center gap-2 transition"
+                                >
+                                    <MessageCircle className="w-3.5 h-3.5" />
+                                    <span>Daftar via Grup WA</span>
+                                    <ExternalLink className="w-3 h-3 opacity-60" />
+                                </a>
+                            </div>
+                        ))}
+                    </div>
+
+                </div>
+            </section>
+
+            {/* PROGRAM KERJA & INOVASI (Clean Filterable Tabs) */}
+            <section id="proker" className="py-16 md:py-20 bg-slate-50 border-b border-slate-200/80">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    {/* Header */}
+                    <div className="text-center max-w-3xl mx-auto mb-10">
+                        <div className="inline-flex items-center gap-1.5 text-blue-600 text-xs font-extrabold uppercase tracking-wider mb-2">
+                            <Target className="w-3.5 h-3.5" />
+                            <span>Aksi & Transformasi</span>
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+                            Program Kerja Unggulan
+                        </h2>
+                        <p className="text-slate-500 text-sm sm:text-base mt-2">
+                            Inisiatif terstruktur BEM UNWAHA dalam memajukan potensi keilmuan, kepemimpinan, dan keagamaan.
+                        </p>
+                    </div>
+
+                    {/* Filter Tabs */}
+                    <div className="flex flex-wrap justify-center gap-2 mb-10">
+                        {[
+                            { id: 'semua', label: 'Semua Program' },
+                            { id: 'keagamaan', label: 'Keagamaan' },
+                            { id: 'kaderisasi', label: 'Kaderisasi' },
+                            { id: 'pengabdian', label: 'Pengabdian' },
+                            { id: 'akademik', label: 'Akademik' },
+                        ].map((tab) => (
+                            <button
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id)}
+                                className={`px-4 py-2 rounded-xl text-xs font-bold transition ${activeTab === tab.id ? 'bg-blue-600 text-white shadow-sm' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}`}
+                            >
+                                {tab.label}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Program Cards Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {filteredProker.map((proker) => {
+                            const Icon = proker.icon
+                            return (
+                                <div
+                                    key={proker.id}
+                                    className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between"
+                                >
+                                    <div>
+                                        <div className="flex items-center justify-between mb-4">
+                                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${proker.iconColor}`}>
+                                                <Icon className="w-6 h-6" />
+                                            </div>
+                                            <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">
+                                                {proker.category}
+                                            </span>
+                                        </div>
+
+                                        <h3 className="text-lg font-bold text-slate-900 mb-2">
+                                            {proker.title}
+                                        </h3>
+                                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6">
+                                            {proker.desc}
+                                        </p>
+                                    </div>
+
+                                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                                        <span className="text-slate-400 font-medium">Pelaksana:</span>
+                                        <span className="font-bold text-slate-700">{proker.kementerian}</span>
+                                    </div>
                                 </div>
                             )
                         })}
                     </div>
-
-                    {/* Global Meta & Info Banner */}
-                    <div className="glass-card p-6 md:p-8 border border-dark-border/80">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-center">
-                            {/* Broadcast Channels */}
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-xl bg-blue-primary/10 flex items-center justify-center flex-shrink-0">
-                                    <Video className="w-5 h-5 text-blue-primary" />
-                                </div>
-                                <div>
-                                    <div className="text-[11px] text-slate-500 uppercase font-black tracking-wider">Media Live Broadcast</div>
-                                    <div className="text-sm font-bold text-slate-300">Zoom Meeting & YouTube Live</div>
-                                </div>
-                            </div>
-
-                            {/* Certificate */}
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-xl bg-cyan-accent/10 flex items-center justify-center flex-shrink-0">
-                                    <Award className="w-5 h-5 text-cyan-accent" />
-                                </div>
-                                <div>
-                                    <div className="text-[11px] text-slate-500 uppercase font-black tracking-wider">Apresiasi & Dokumen</div>
-                                    <div className="text-sm font-bold text-slate-300">E-Sertifikat Tingkat Nasional</div>
-                                </div>
-                            </div>
-
-                            {/* Organizer Info */}
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-xl bg-pink-500/10 flex items-center justify-center flex-shrink-0">
-                                    <Instagram className="w-5 h-5 text-pink-400" />
-                                </div>
-                                <div>
-                                    <div className="text-[11px] text-slate-500 uppercase font-black tracking-wider">Instagram Event</div>
-                                    <a
-                                        href="https://www.instagram.com/eduuverse"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-sm font-bold text-pink-400 hover:underline flex items-center gap-1"
-                                    >
-                                        @eduuverse <ExternalLink className="w-3 h-3" />
-                                    </a>
-                                </div>
-                            </div>
-
-                            {/* Contact Person */}
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
-                                    <Phone className="w-5 h-5 text-emerald-400" />
-                                </div>
-                                <div>
-                                    <div className="text-[11px] text-slate-500 uppercase font-black tracking-wider">Contact Person (WA)</div>
-                                    <a
-                                        href="https://wa.me/6288975516069"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-sm font-bold text-emerald-400 hover:underline flex items-center gap-1"
-                                    >
-                                        088975516069 <ExternalLink className="w-3 h-3" />
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Register Banner Footer */}
-                        <div className="mt-8 pt-6 border-t border-dark-border/50 flex flex-col sm:flex-row items-center justify-between gap-4">
-                            <div className="text-sm text-slate-400">
-                                📢 <span className="font-semibold text-slate-300">Info Jadwal & Seminar Lainnya:</span> kunjungi portal seminar di bawah ini.
-                            </div>
-                            <a
-                                href="https://bit.ly/RgSENA"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-6 py-2.5 bg-gradient-to-r from-blue-primary to-cyan-accent text-white font-bold text-sm rounded-full flex items-center gap-1.5 hover:scale-105 hover:shadow-glow-blue transition-all"
-                            >
-                                <span>Portal Info Seminar</span>
-                                <ArrowRight className="w-4 h-4" />
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </section>
 
-            {/* Bento Grid Program Showcase */}
-            <section id="proker" className="py-20 px-4 relative z-10">
-                <div className="max-w-7xl mx-auto">
-                    <h2 className="text-4xl md:text-5xl font-black text-center mb-4">
-                        <span className="gradient-text">Program Kerja Unggulan</span>
-                    </h2>
-                    <p className="text-center text-slate-400 mb-12 max-w-2xl mx-auto">
-                        Inovasi dan dedikasi dalam setiap langkah perubahan
-                    </p>
-
-                    {/* Bento Grid Layout */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {/* Large Card - Gema Sholawat */}
-                        <div className="md:col-span-2 md:row-span-2 glass-card p-8 group glow-hover">
-                            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-primary to-cyan-accent flex items-center justify-center mb-6">
-                                <Heart className="w-8 h-8 text-white" />
-                            </div>
-                            <h3 className="text-3xl font-bold mb-4">Gema Sholawat</h3>
-                            <p className="text-slate-300 leading-relaxed mb-4">
-                                Program keagamaan rutin untuk mempererat ukhuwah islamiyah dan memperkuat spiritualitas mahasiswa melalui pembacaan sholawat bersama. Menciptakan atmosfer religius yang kental di lingkungan kampus.
-                            </p>
-                            <div className="flex flex-wrap gap-2">
-                                <span className="px-3 py-1 bg-blue-primary/20 text-blue-primary rounded-full text-sm">Keagamaan</span>
-                                <span className="px-3 py-1 bg-cyan-accent/20 text-cyan-accent rounded-full text-sm">Rutin</span>
-                            </div>
+            {/* PROFIL KABINET, VISI MISI & FILOSOFI LOGO */}
+            <section id="profil" className="py-16 md:py-20 bg-white border-b border-slate-200/80">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    {/* Header */}
+                    <div className="text-center max-w-3xl mx-auto mb-14">
+                        <div className="inline-flex items-center gap-1.5 text-blue-600 text-xs font-extrabold uppercase tracking-wider mb-2">
+                            <Lightbulb className="w-3.5 h-3.5" />
+                            <span>Identitas, Visi & Filosofi</span>
                         </div>
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+                            Profil & Filosofi Kabinet Kanagara
+                        </h2>
+                        <p className="text-slate-500 text-sm sm:text-base mt-2">
+                            Arah pergerakan BEM UNWAHA periode 2025/2026 dalam membangun kemuliaan, integritas, dan prestasi tertinggi kampus.
+                        </p>
+                    </div>
 
-                        {/* Medium Card - LDKM */}
-                        <div className="glass-card p-8 group glow-hover">
-                            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-accent to-blue-500 flex items-center justify-center mb-6">
-                                <Users className="w-8 h-8 text-white" />
-                            </div>
-                            <h3 className="text-2xl font-bold mb-4">LDKM</h3>
-                            <p className="text-slate-300 leading-relaxed">
-                                Latihan Dasar Kepemimpinan Mahasiswa untuk membentuk karakter pemimpin yang berintegritas, visioner, dan berakhlak mulia.
-                            </p>
-                        </div>
-
-                        {/* Medium Card - BEM Mengabdi */}
-                        <div className="glass-card p-8 group glow-hover">
-                            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center mb-6">
-                                <Sparkles className="w-8 h-8 text-white" />
-                            </div>
-                            <h3 className="text-2xl font-bold mb-4">BEM Mengabdi</h3>
-                            <p className="text-slate-300 leading-relaxed">
-                                Program pengabdian masyarakat untuk memberikan kontribusi nyata kepada masyarakat sekitar kampus melalui berbagai kegiatan sosial.
-                            </p>
-                        </div>
-
-                        {/* Small Card - Kajian Ilmiah */}
-                        <div className="md:col-span-2 glass-card p-8 group glow-hover">
-                            <div className="flex items-start gap-6">
-                                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0">
-                                    <BookOpen className="w-8 h-8 text-white" />
+                    {/* FILOSOFI DESAIN BUNGA MATAHARI EMAS (KABINET KANAGARA) */}
+                    <div className="mb-16 bg-gradient-to-br from-amber-50/60 via-white to-orange-50/40 border border-amber-200/80 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                            
+                            {/* Logo Showcase Left */}
+                            <div className="lg:col-span-4 flex flex-col items-center text-center">
+                                <div className="relative p-3 rounded-3xl bg-white border border-amber-200 shadow-xl max-w-[260px] w-full">
+                                    <div className="rounded-2xl overflow-hidden bg-slate-900/5 p-2">
+                                        <img
+                                            src="/logo-kanagara.jpg"
+                                            alt="Logo Bunga Matahari Emas - Kabinet Kanagara BEM UNWAHA"
+                                            className="w-full h-auto object-contain hover:scale-105 transition-transform duration-500"
+                                        />
+                                    </div>
+                                    <div className="mt-4 pb-2">
+                                        <div className="text-xs font-extrabold text-amber-800 uppercase tracking-wider">
+                                            Bunga Matahari Emas
+                                        </div>
+                                        <div className="text-[11px] text-slate-500 font-medium mt-0.5">
+                                            Lambang Resmi Kabinet Kanagara
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+
+                            {/* Philosophy 4 Pillars Grid Right */}
+                            <div className="lg:col-span-8 space-y-6">
                                 <div>
-                                    <h3 className="text-2xl font-bold mb-3">Kajian Ilmiah & Diskusi</h3>
-                                    <p className="text-slate-300 leading-relaxed">
-                                        Forum diskusi dan kajian untuk meningkatkan wawasan mahasiswa tentang isu-isu terkini, akademik, dan sosial kemasyarakatan.
+                                    <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-800 font-bold text-xs uppercase tracking-wider">
+                                        Filosofi Desain Lambang
+                                    </span>
+                                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">
+                                        Makna Filosofis Bunga Matahari Emas
+                                    </h3>
+                                    <p className="text-slate-600 text-xs sm:text-sm mt-1">
+                                        Setiap unsur ukiran, pola spiral, dan warna emas merepresentasikan semangat pergerakan yang terstruktur, visioner, dan bermartabat.
                                     </p>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
-            {/* Gallery Section - Dokumentasi Kegiatan */}
-            <section id="galeri" className="py-20 px-4 relative z-10">
-                <div className="max-w-7xl mx-auto">
-                    <h2 className="text-4xl md:text-5xl font-black text-center mb-4">
-                        <span className="gradient-text">Galeri Kegiatan</span>
-                    </h2>
-                    <p className="text-center text-slate-400 mb-12 max-w-2xl mx-auto">
-                        Dokumentasi aktivitas dan program kerja BEM UNWAHA
-                    </p>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    
+                                    {/* Pillar 1: Bunga Matahari */}
+                                    <div className="p-4 bg-white rounded-2xl border border-amber-100 shadow-sm">
+                                        <div className="flex items-center gap-2.5 mb-2">
+                                            <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-sm">
+                                                🌻
+                                            </div>
+                                            <h4 className="text-sm font-bold text-slate-900">
+                                                Bunga Matahari (Fokus Utama)
+                                            </h4>
+                                        </div>
+                                        <p className="text-xs text-slate-600 leading-relaxed">
+                                            Secara alami, bunga matahari selalu tumbuh menghadap cahaya. Ini melambangkan optimisme, harapan, dan visi yang selalu berorientasi ke depan. Menggunakan bunga matahari sebagai ikon utama mencerminkan sebuah pergerakan yang selalu mencari pencerahan, kebenaran, dan terus bertumbuh menuju arah yang positif.
+                                        </p>
+                                    </div>
 
-                    {/* Gallery Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {/* Gallery Item 1 - Large */}
-                        <div className="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-2xl glass-card border-2 border-dark-border/50 hover:border-blue-primary/50 transition-all duration-300">
-                            <div className="aspect-[16/9] md:aspect-[16/10] bg-gradient-to-br from-blue-primary/20 to-cyan-accent/20 overflow-hidden">
-                                <img
-                                    src="/gambar2.JPG"
-                                    alt="Kegiatan BEM UNWAHA"
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                />
-                            </div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div className="absolute bottom-0 left-0 right-0 p-6">
-                                    <h3 className="text-xl font-bold text-white mb-2">Gema Sholawat 2025</h3>
-                                    <p className="text-slate-300 text-sm">Kegiatan rutin pembacaan sholawat bersama</p>
-                                </div>
-                            </div>
-                        </div>
+                                    {/* Pillar 2: Pola Geometris Spiral */}
+                                    <div className="p-4 bg-white rounded-2xl border border-amber-100 shadow-sm">
+                                        <div className="flex items-center gap-2.5 mb-2">
+                                            <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-sm">
+                                                🌀
+                                            </div>
+                                            <h4 className="text-sm font-bold text-slate-900">
+                                                Pola Geometris Spiral (Bagian Tengah)
+                                            </h4>
+                                        </div>
+                                        <p className="text-xs text-slate-600 leading-relaxed">
+                                            Bagian tengah bunga mengadopsi pola spiral matematis (deret Fibonacci). Pola ini melambangkan keteraturan, sinergi, dan sistem yang terstruktur dengan sangat baik. Setiap garis saling menyilang dan menopang, menunjukkan bahwa di balik tampilan simpel, terdapat fondasi logika dan kolaborasi solid yang tak terpisahkan.
+                                        </p>
+                                    </div>
 
-                        {/* Gallery Item 2 */}
-                        <div className="group relative overflow-hidden rounded-2xl glass-card border-2 border-dark-border/50 hover:border-blue-primary/50 transition-all duration-300">
-                            <div className="aspect-square bg-gradient-to-br from-cyan-accent/20 to-blue-500/20 overflow-hidden">
-                                <img
-                                    src="/gambar6.JPG"
-                                    alt="Kegiatan BEM UNWAHA"
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                />
-                            </div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div className="absolute bottom-0 left-0 right-0 p-4">
-                                    <h3 className="text-lg font-bold text-white mb-1">LDKM 2025</h3>
-                                    <p className="text-slate-300 text-xs">Pelatihan kepemimpinan</p>
-                                </div>
-                            </div>
-                        </div>
+                                    {/* Pillar 3: Warna Emas Metalik */}
+                                    <div className="p-4 bg-white rounded-2xl border border-amber-100 shadow-sm">
+                                        <div className="flex items-center gap-2.5 mb-2">
+                                            <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-sm">
+                                                👑
+                                            </div>
+                                            <h4 className="text-sm font-bold text-slate-900">
+                                                Warna Emas Metalik (Palet Warna)
+                                            </h4>
+                                        </div>
+                                        <p className="text-xs text-slate-600 leading-relaxed">
+                                            Emas secara universal adalah simbol dari kejayaan, kebijaksanaan, dan kualitas tertinggi. Penggunaan warna emas elegan ini sangat sejalan dengan konsep <strong>Kanagara (mahkota/kemuliaan)</strong>, yang menegaskan tekad untuk mencapai standar tertinggi dalam setiap karya atau program yang dijalankan.
+                                        </p>
+                                    </div>
 
-                        {/* Gallery Item 3 */}
-                        <div className="group relative overflow-hidden rounded-2xl glass-card border-2 border-dark-border/50 hover:border-blue-primary/50 transition-all duration-300">
-                            <div className="aspect-square bg-gradient-to-br from-purple-500/20 to-pink-500/20 overflow-hidden">
-                                <img
-                                    src="/gambar3.JPG"
-                                    alt="Kegiatan BEM UNWAHA"
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                />
-                            </div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div className="absolute bottom-0 left-0 right-0 p-4">
-                                    <h3 className="text-lg font-bold text-white mb-1">BEM Mengabdi</h3>
-                                    <p className="text-slate-300 text-xs">Pengabdian masyarakat</p>
-                                </div>
-                            </div>
-                        </div>
+                                    {/* Pillar 4: Ukiran Detail pada Kelopak */}
+                                    <div className="p-4 bg-white rounded-2xl border border-amber-100 shadow-sm">
+                                        <div className="flex items-center gap-2.5 mb-2">
+                                            <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-sm">
+                                                ⚜️
+                                            </div>
+                                            <h4 className="text-sm font-bold text-slate-900">
+                                                Ukiran Detail pada Kelopak (Tekstur)
+                                            </h4>
+                                        </div>
+                                        <p className="text-xs text-slate-600 leading-relaxed">
+                                            Kelopak bunga memiliki ukiran rumit di bagian dalam namun tetap rapi dari luar. Ini merepresentasikan apresiasi terhadap proses dan ketelitian. Menunjukkan dedikasi dan perhatian pada detail terkecil dalam mengelola kerumitan menjadi karya yang mudah dipahami dan fungsional.
+                                        </p>
+                                    </div>
 
-                        {/* Gallery Item 4 */}
-                        <div className="md:col-span-2 group relative overflow-hidden rounded-2xl glass-card border-2 border-dark-border/50 hover:border-blue-primary/50 transition-all duration-300">
-                            <div className="aspect-[21/9] bg-gradient-to-br from-blue-500/20 to-cyan-accent/20 overflow-hidden">
-                                <img
-                                    src="/gambar4.JPG"
-                                    alt="Kegiatan BEM UNWAHA"
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                />
-                            </div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div className="absolute bottom-0 left-0 right-0 p-6">
-                                    <h3 className="text-xl font-bold text-white mb-2">Kajian Ilmiah & Diskusi</h3>
-                                    <p className="text-slate-300 text-sm">Forum diskusi mahasiswa</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Gallery Item 5 */}
-                        <div className="group relative overflow-hidden rounded-2xl glass-card border-2 border-dark-border/50 hover:border-blue-primary/50 transition-all duration-300">
-                            <div className="aspect-square bg-gradient-to-br from-green-500/20 to-emerald-500/20 overflow-hidden">
-                                <img
-                                    src="/gambar5.JPG"
-                                    alt="Kegiatan BEM UNWAHA"
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                />
-                            </div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div className="absolute bottom-0 left-0 right-0 p-4">
-                                    <h3 className="text-lg font-bold text-white mb-1">Kompetisi Mahasiswa</h3>
-                                    <p className="text-slate-300 text-xs">Event tahunan</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
 
-            {/* Social Media Links - CENTER OF ATTENTION */}
-            <section id="sosmed" className="py-20 px-4 relative z-10">
-                <div className="max-w-4xl mx-auto">
-                    <h2 className="text-4xl md:text-5xl font-black text-center mb-4">
-                        <span className="gradient-text">Terhubung Dengan Kami</span>
-                    </h2>
-                    <p className="text-center text-slate-400 mb-12">
-                        Ikuti perjalanan kami dan jangan lewatkan update terbaru
-                    </p>
+                    {/* Visi & Misi Dual Cards */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+                        
+                        {/* Visi Card */}
+                        <div className="lg:col-span-5 bg-gradient-to-br from-blue-900 to-indigo-900 text-white rounded-3xl p-8 shadow-sm flex flex-col justify-between">
+                            <div>
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-800 text-blue-200 text-xs font-bold uppercase tracking-wider mb-6">
+                                    Visi Utama
+                                </div>
+                                <h3 className="text-2xl font-extrabold mb-4 leading-snug">
+                                    Mewujudkan BEM UNWAHA yang Inovatif, Aspiratif, dan Religius
+                                </h3>
+                                <p className="text-blue-100 text-sm sm:text-base leading-relaxed">
+                                    Sebagai wadah pengembangan potensi mahasiswa, pengawal aspirasi yang responsif, serta pelopor kemajuan kampus berlandaskan nilai-nilai keislaman Ahlussunnah wal Jama&apos;ah demi mencapai puncak kemuliaan karya.
+                                </p>
+                            </div>
+                            <div className="mt-8 pt-4 border-t border-blue-800/80 text-xs text-blue-300">
+                                Kabinet Kanagara · Periode 2025/2026
+                            </div>
+                        </div>
 
-                    <div className="space-y-6">
-                        {/* Instagram */}
-                        <a
-                            href="https://www.instagram.com/bemunwaha?igsh=MTluMjJ5NmszaTl5bA=="
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-between glass-card p-6 group glow-hover"
-                        >
-                            <div className="flex items-center gap-4">
-                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 flex items-center justify-center">
-                                    <Instagram className="w-7 h-7 text-white" />
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold mb-1">Instagram</h3>
-                                    <p className="text-slate-400 text-sm">@bemunwaha</p>
-                                </div>
+                        {/* Misi Card */}
+                        <div className="lg:col-span-7 bg-slate-50 border border-slate-200 rounded-3xl p-8 shadow-sm">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider mb-6">
+                                4 Misi Strategis
                             </div>
-                            <div className="text-blue-primary group-hover:translate-x-2 transition-transform duration-300">
-                                →
+                            <div className="space-y-4">
+                                {[
+                                    { title: 'Inovasi Program Kerja', desc: 'Menyelenggarakan kegiatan kemahasiswaan yang kreatif, terukur, dan berdampak nyata bagi almamater.' },
+                                    { title: 'Responsivitas Aspirasi', desc: 'Menjadi jembatan komunikasi yang aktif, solutif, dan terbuka antara mahasiswa dengan rektorat.' },
+                                    { title: 'Penguatan Nilai Religius', desc: 'Menanamkan nilai-nilai keislaman dan akhlakul karimah dalam seluruh denyut pergerakan organisasi.' },
+                                    { title: 'Kolaborasi dan Sinergi', desc: 'Membangun sinergisitas harmonis dengan UKM, HIMA prodi, serta pihak eksternal kampus.' },
+                                ].map((misi, i) => (
+                                    <div key={i} className="flex items-start gap-4 p-3 bg-white rounded-xl border border-slate-200/80">
+                                        <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm flex-shrink-0">
+                                            0{i + 1}
+                                        </div>
+                                        <div>
+                                            <h4 className="text-sm font-bold text-slate-900">{misi.title}</h4>
+                                            <p className="text-xs text-slate-500 mt-0.5">{misi.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                        </a>
+                        </div>
 
-                        {/* YouTube */}
-                        <a
-                            href="https://youtube.com/@bemunwaha?si=cFoZc4OKoGUgIzrV"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-between glass-card p-6 group glow-hover"
-                        >
-                            <div className="flex items-center gap-4">
-                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center">
-                                    <Youtube className="w-7 h-7 text-white" />
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold mb-1">YouTube</h3>
-                                    <p className="text-slate-400 text-sm">BEM UNWAHA</p>
-                                </div>
-                            </div>
-                            <div className="text-blue-primary group-hover:translate-x-2 transition-transform duration-300">
-                                →
-                            </div>
-                        </a>
-
-                        {/* TikTok */}
-                        <a
-                            href="https://www.tiktok.com/@official_bemunwaha?_r=1&_t=ZS-935BolWvXLL"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-between glass-card p-6 group glow-hover"
-                        >
-                            <div className="flex items-center gap-4">
-                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-700 flex items-center justify-center">
-                                    <Music className="w-7 h-7 text-white" />
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold mb-1">TikTok</h3>
-                                    <p className="text-slate-400 text-sm">@official_bemunwaha</p>
-                                </div>
-                            </div>
-                            <div className="text-blue-primary group-hover:translate-x-2 transition-transform duration-300">
-                                →
-                            </div>
-                        </a>
-
-                        {/* WhatsApp */}
-                        <a
-                            href="https://wa.me/6283839976681"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-between glass-card p-6 group glow-hover"
-                        >
-                            <div className="flex items-center gap-4">
-                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center">
-                                    <MessageCircle className="w-7 h-7 text-white" />
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold mb-1">WhatsApp</h3>
-                                    <p className="text-slate-400 text-sm">Official Contact</p>
-                                </div>
-                            </div>
-                            <div className="text-blue-primary group-hover:translate-x-2 transition-transform duration-300">
-                                →
-                            </div>
-                        </a>
                     </div>
+
+                    {/* Pengurus Inti Section */}
+                    <div>
+                        <div className="text-center mb-8">
+                            <h3 className="text-xl font-bold text-slate-900">
+                                Badan Pengurus Harian (BPH)
+                            </h3>
+                            <p className="text-xs text-slate-500 mt-1">Pimpinan Harian BEM UNWAHA Kabinet Kanagara 2025/2026</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {pengurusData.map((pengurus, idx) => (
+                                <div
+                                    key={idx}
+                                    className="bg-white border border-slate-200 rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition"
+                                >
+                                    <div className={`w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center font-extrabold text-xl shadow-md ${pengurus.color}`}>
+                                        {pengurus.initial}
+                                    </div>
+                                    <h4 className="font-bold text-slate-900 text-sm">{pengurus.nama}</h4>
+                                    <div className="text-blue-600 font-bold text-xs mt-0.5">{pengurus.jabatan}</div>
+                                    <div className="text-[11px] text-slate-400 mt-1">{pengurus.prodi}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
-            {/* Footer */}
-            <footer className="relative z-10 bg-dark-card/50 border-t border-dark-border/50 py-12 px-4 mt-20">
-                <div className="max-w-7xl mx-auto">
-                    <div className="grid md:grid-cols-3 gap-8 mb-8">
-                        {/* Alamat Sekretariat */}
+            {/* DOKUMENTASI & GALERI KEGIATAN */}
+            <section id="galeri" className="py-16 md:py-20 bg-slate-50 border-b border-slate-200/80">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    {/* Header */}
+                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
                         <div>
-                            <h4 className="text-lg font-bold mb-4 gradient-text">Sekretariat</h4>
-                            <p className="text-slate-400 text-sm leading-relaxed">
-                                Universitas KH. A. Wahab Hasbullah<br />
-                                Jl. Garuda No. 09, Tambakberas<br />
-                                Jombang, Jawa Timur 61471
+                            <div className="inline-flex items-center gap-1.5 text-blue-600 text-xs font-extrabold uppercase tracking-wider mb-2">
+                                <Compass className="w-3.5 h-3.5" />
+                                <span>Momen & Dokumentasi</span>
+                            </div>
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+                                Galeri Kegiatan Mahasiswa
+                            </h2>
+                            <p className="text-slate-500 text-sm sm:text-base mt-1">
+                                Rekam jejak aktivitas, pengabdian, dan dinamika kebersamaan BEM UNWAHA.
+                            </p>
+                        </div>
+                        <a
+                            href="https://www.instagram.com/bemunwaha"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-700"
+                        >
+                            <span>Lihat Foto Lainnya di Instagram</span>
+                            <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                    </div>
+
+                    {/* Image Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {galleryImages.map((img, i) => (
+                            <div
+                                key={i}
+                                className="group relative bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition"
+                            >
+                                <div className="aspect-[4/3] overflow-hidden bg-slate-100">
+                                    <img
+                                        src={img.src}
+                                        alt={img.title}
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        loading="lazy"
+                                    />
+                                </div>
+                                <div className="p-4 bg-white">
+                                    <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider">
+                                        {img.category}
+                                    </span>
+                                    <h4 className="font-bold text-slate-900 text-sm mt-0.5">
+                                        {img.title}
+                                    </h4>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* KANAL SOSIAL MEDIA & KONTAK */}
+            <section id="kontak" className="py-16 md:py-20 bg-white border-b border-slate-200/80">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="bg-slate-900 text-white rounded-3xl p-8 sm:p-12">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            
+                            <div className="lg:col-span-6 space-y-4">
+                                <span className="px-3 py-1 rounded-full bg-blue-600 text-white text-xs font-bold uppercase tracking-wider">
+                                    Terhubung Bersama Kami
+                                </span>
+                                <h3 className="text-2xl sm:text-3xl font-extrabold">
+                                    Kanal Resmi Informasi & Publikasi
+                                </h3>
+                                <p className="text-slate-300 text-sm leading-relaxed">
+                                    Dapatkan update agenda kampus, siaran langsung seminar, dan konten kreatif kemahasiswaan melalui akun media sosial resmi BEM UNWAHA.
+                                </p>
+                            </div>
+
+                            <div className="lg:col-span-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                {[
+                                    { name: 'Instagram', handle: '@bemunwaha', icon: Instagram, href: 'https://www.instagram.com/bemunwaha', color: 'hover:bg-pink-600' },
+                                    { name: 'YouTube', handle: 'BEM UNWAHA', icon: Youtube, href: 'https://youtube.com/@bemunwaha', color: 'hover:bg-red-600' },
+                                    { name: 'TikTok', handle: '@official_bemunwaha', icon: Music, href: 'https://www.tiktok.com/@official_bemunwaha', color: 'hover:bg-slate-700' },
+                                    { name: 'WhatsApp', handle: 'Official Contact', icon: MessageCircle, href: 'https://wa.me/6283839976681', color: 'hover:bg-emerald-600' },
+                                ].map((soc, i) => {
+                                    const Icon = soc.icon
+                                    return (
+                                        <a
+                                            key={i}
+                                            href={soc.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={`p-4 bg-slate-800/80 rounded-2xl border border-slate-700 text-center flex flex-col items-center justify-center transition-all ${soc.color}`}
+                                        >
+                                            <Icon className="w-6 h-6 mb-2 text-white" />
+                                            <div className="text-xs font-bold text-white">{soc.name}</div>
+                                            <div className="text-[10px] text-slate-400 mt-0.5 truncate w-full">{soc.handle}</div>
+                                        </a>
+                                    )
+                                })}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* OFFICIAL FOOTER */}
+            <footer className="bg-slate-900 text-slate-400 text-xs py-14">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-slate-800">
+                        
+                        {/* Column 1: Organization Info */}
+                        <div className="lg:col-span-2 space-y-4">
+                            <div className="flex items-center gap-3">
+                                <img
+                                    src="/logo-kanagara.jpg"
+                                    alt="Logo Kabinet Kanagara"
+                                    className="w-10 h-10 object-contain rounded-full border border-amber-500/40 bg-slate-900"
+                                />
+                                <div>
+                                    <div className="font-bold text-white text-base">BEM UNWAHA</div>
+                                    <div className="text-[11px] text-amber-400 font-semibold">Kabinet Kanagara 2025/2026</div>
+                                </div>
+                            </div>
+                            <p className="text-slate-400 text-xs leading-relaxed max-w-sm">
+                                Lembaga eksekutif mahasiswa tertinggi di tingkat universitas yang menaungi aspirasi dan inovasi mahasiswa Universitas KH. A. Wahab Hasbullah.
                             </p>
                         </div>
 
-                        {/* Kontak */}
-                        <div>
-                            <h4 className="text-lg font-bold mb-4 gradient-text">Kontak</h4>
-                            <div className="space-y-2 text-sm">
-                                <a href="https://wa.me/6283839976681" className="flex items-center gap-2 text-slate-400 hover:text-blue-primary transition-colors">
-                                    <MessageCircle size={16} />
-                                    <span>+62 838-3997-6681</span>
-                                </a>
-                                <a href="mailto:bem@unwaha.ac.id" className="flex items-center gap-2 text-slate-400 hover:text-blue-primary transition-colors">
-                                    <span>📧</span>
-                                    <span>bem@unwaha.ac.id</span>
-                                </a>
+                        {/* Column 2: Layanan */}
+                        <div className="space-y-3">
+                            <div className="font-bold text-white uppercase text-xs tracking-wider">Layanan Mahasiswa</div>
+                            <ul className="space-y-2">
+                                <li><a href="#layanan" className="hover:text-white transition">Kotak Aspirasi Mahasiswa</a></li>
+                                <li><a href="#pengumuman" className="hover:text-white transition">Kalender Kegiatan Kampus</a></li>
+                                <li><a href="#proker" className="hover:text-white transition">Pedoman Administrasi</a></li>
+                                <li><a href="https://bit.ly/RgSENA" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Ruang Peluang & Beasiswa</a></li>
+                            </ul>
+                        </div>
+
+                        {/* Column 3: Navigasi */}
+                        <div className="space-y-3">
+                            <div className="font-bold text-white uppercase text-xs tracking-wider">Tautan Cepat</div>
+                            <ul className="space-y-2">
+                                <li><a href="#home" className="hover:text-white transition">Beranda</a></li>
+                                <li><a href="#profil" className="hover:text-white transition">Profil Kabinet</a></li>
+                                <li><a href="#proker" className="hover:text-white transition">Program Kerja</a></li>
+                                <li><a href="#galeri" className="hover:text-white transition">Galeri Dokumentasi</a></li>
+                            </ul>
+                        </div>
+
+                        {/* Column 4: Sekretariat */}
+                        <div className="space-y-3">
+                            <div className="font-bold text-white uppercase text-xs tracking-wider">Sekretariat BEM</div>
+                            <p className="text-slate-400 leading-relaxed">
+                                Gedung BEM Universitas KH. A. Wahab Hasbullah (UNWAHA)<br />
+                                Jl. Garuda No. 09, Tambakberas, Jombang, Jawa Timur 61471
+                            </p>
+                            <div className="pt-2 text-slate-300">
+                                Email: <span className="text-white">bem@unwaha.ac.id</span>
                             </div>
                         </div>
 
-                        {/* Social Links */}
-                        <div>
-                            <h4 className="text-lg font-bold mb-4 gradient-text">Ikuti Kami</h4>
-                            <div className="flex gap-4">
-                                <a href="https://www.instagram.com/bemunwaha?igsh=MTluMjJ5NmszaTl5bA==" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg bg-dark-border/50 flex items-center justify-center hover:bg-blue-primary/20 hover:text-blue-primary transition-all">
-                                    <Instagram size={20} />
-                                </a>
-                                <a href="https://youtube.com/@bemunwaha?si=cFoZc4OKoGUgIzrV" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg bg-dark-border/50 flex items-center justify-center hover:bg-blue-primary/20 hover:text-blue-primary transition-all">
-                                    <Youtube size={20} />
-                                </a>
-                                <a href="https://www.tiktok.com/@official_bemunwaha?_r=1&_t=ZS-935BolWvXLL" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg bg-dark-border/50 flex items-center justify-center hover:bg-blue-primary/20 hover:text-blue-primary transition-all">
-                                    <Music size={20} />
-                                </a>
-                            </div>
-                        </div>
                     </div>
 
-                    {/* Copyright */}
-                    <div className="pt-8 border-t border-dark-border/50 text-center">
-                        <p className="text-slate-400 text-sm">
-                            © 2026 BEM Universitas KH. A. Wahab Hasbullah Jombang
-                        </p>
-                        <p className="text-slate-500 text-xs mt-2">
-                            Kabinet Sinergi Perubahan - Inovatif, Aspiratif, dan Religius
-                        </p>
+                    {/* Bottom Copyright */}
+                    <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+                        <div>
+                            © 2026 BEM Universitas KH. A. Wahab Hasbullah Jombang. All Rights Reserved.
+                        </div>
+                        <div className="flex items-center gap-4">
+                            <span>Inovatif</span>
+                            <span>•</span>
+                            <span>Aspiratif</span>
+                            <span>•</span>
+                            <span>Religius</span>
+                        </div>
                     </div>
                 </div>
             </footer>
+
+            {/* Back to Top Floating Button */}
+            <button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                aria-label="Kembali ke atas"
+                className={`fixed bottom-6 right-6 z-40 p-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg transition-all duration-300 ${showBackToTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}
+            >
+                <ArrowUpCircle className="w-5 h-5" />
+            </button>
         </div>
     )
 }
-
-export default App
