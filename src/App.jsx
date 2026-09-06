@@ -5,7 +5,7 @@ import {
     ArrowRight, Megaphone, ChevronDown, Star, MapPin, Mail,
     ArrowUpCircle, GraduationCap, Zap, Shield, FileText, HelpCircle,
     Handshake, Search, Layers, Compass, Share2, Info, ChevronRight,
-    Building2, Bell, Sparkle
+    Building2, Bell, Sparkle, Maximize2, Download, Copy, Check
 } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 
@@ -22,7 +22,7 @@ const quickServices = [
         badge: 'Advokasi',
         badgeColor: 'bg-blue-50 text-blue-700 border-blue-200',
         iconBg: 'bg-blue-600 text-white',
-        link: 'https://wa.me/6283839976681?text=Halo%20BEM%20UNWAHA,%20saya%20ingin%20menyampaikan%20aspirasi:',
+        link: 'https://wa.me/6289529812893?text=Halo%20BEM%20UNWAHA,%20saya%20ingin%20menyampaikan%20aspirasi:',
         btnText: 'Kirim Aspirasi',
     },
     {
@@ -66,7 +66,7 @@ const quickServices = [
         badge: 'Kemitraan',
         badgeColor: 'bg-rose-50 text-rose-700 border-rose-200',
         iconBg: 'bg-rose-600 text-white',
-        link: 'https://wa.me/6283839976681?text=Halo%20BEM%20UNWAHA,%20kami%20tertarik%20mengajukan%20Media%20Partner:',
+        link: 'https://wa.me/6289529812893?text=Halo%20BEM%20UNWAHA,%20kami%20tertarik%20mengajukan%20Media%20Partner:',
         btnText: 'Ajukan Kerjasama',
     },
     {
@@ -222,19 +222,19 @@ const prokerList = [
 
 const pengurusData = [
     {
-        nama: "Muhammad Fatih Azizi",
-        jabatan: "Ketua BEM UNWAHA",
+        nama: "M. Ridho Danu Muslikhan, S.Pd.",
+        jabatan: "Presiden Mahasiswa",
         periode: "2025/2026",
-        prodi: "Fakultas Ekonomi",
-        initial: "FA",
+        prodi: "Fakultas Ilmu Pendidikan",
+        initial: "RD",
         color: "bg-blue-600 text-white",
     },
     {
-        nama: "Lailatul Badriyah",
-        jabatan: "Wakil Ketua BEM",
+        nama: "M. Fais Febriansyah, S.E.",
+        jabatan: "Wakil Presiden Mahasiswa",
         periode: "2025/2026",
-        prodi: "Fakultas Agama Islam",
-        initial: "LB",
+        prodi: "Fakultas Ekonomi",
+        initial: "MF",
         color: "bg-purple-600 text-white",
     },
     {
@@ -273,6 +273,8 @@ export default function App() {
     const [scrolled, setScrolled] = useState(false)
     const [activeTab, setActiveTab] = useState('semua')
     const [showBackToTop, setShowBackToTop] = useState(false)
+    const [posterModalOpen, setPosterModalOpen] = useState(false)
+    const [copiedHashtag, setCopiedHashtag] = useState(false)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -284,30 +286,18 @@ export default function App() {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
+    const copyHashtags = () => {
+        navigator.clipboard.writeText('#Garuda13 #PKKMBUNWAHA #UNWAHA2026 #unwahajombang')
+        setCopiedHashtag(true)
+        setTimeout(() => setCopiedHashtag(false), 2000)
+    }
+
     const filteredProker = activeTab === 'semua' 
         ? prokerList 
         : prokerList.filter(p => p.category.toLowerCase().includes(activeTab.toLowerCase()))
 
     return (
         <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col antialiased">
-            
-            {/* Top Announcement Ribbon */}
-            <div className="bg-slate-900 text-white text-xs py-2 px-4 border-b border-slate-800">
-                <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                        <span className="bg-red-600 text-white px-2 py-0.5 rounded font-bold text-[10px] uppercase tracking-wider">HUT RI Ke-81</span>
-                        <span className="text-slate-300 font-medium truncate">🇮🇩 Bersatu, Berdaulat, Rakyat Sejahtera, Indonesia Maju!</span>
-                    </div>
-                    <div className="flex items-center gap-4 text-slate-400 text-[11px]">
-                        <a href="https://wa.me/6283839976681" target="_blank" rel="noopener noreferrer" className="hover:text-white transition flex items-center gap-1">
-                            <Phone className="w-3 h-3" /> Layanan Cepat: +62 838-3997-6681
-                        </a>
-                        <span className="hidden md:inline text-slate-600">•</span>
-                        <span className="hidden md:inline font-semibold text-amber-300">Kabinet Kanagara</span>
-                    </div>
-                </div>
-            </div>
-
             {/* Main Navigation Bar (Clean & Professional, inspired by apps.bem-unsoed.com) */}
             <header className={`sticky top-0 z-50 transition-all duration-200 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/80 py-3' : 'bg-white border-b border-slate-100 py-4'}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -334,12 +324,17 @@ export default function App() {
 
                         {/* Desktop Navigation Links */}
                         <nav className="hidden lg:flex items-center gap-1 font-medium text-sm text-slate-600">
-                            <a href="#home" className="px-3.5 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Beranda</a>
-                            <a href="#layanan" className="px-3.5 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Layanan Mahasiswa</a>
-                            <a href="#pengumuman" className="px-3.5 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Pengumuman & Agenda</a>
-                            <a href="#proker" className="px-3.5 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Program Kerja</a>
-                            <a href="#profil" className="px-3.5 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Profil & Visi Misi</a>
-                            <a href="#galeri" className="px-3.5 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Galeri</a>
+                            <a href="#home" className="px-3 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Beranda</a>
+                            <a href="#maba" className="px-3.5 py-2 rounded-lg text-blue-700 bg-blue-50/90 font-bold hover:bg-blue-100 transition flex items-center gap-1.5 border border-blue-200/60 shadow-xs">
+                                <GraduationCap className="w-4 h-4 text-blue-600" />
+                                <span>Maba 2026</span>
+                                <span className="bg-blue-600 text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded-full uppercase">Baru</span>
+                            </a>
+                            <a href="#layanan" className="px-3 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Layanan Mahasiswa</a>
+                            <a href="#pengumuman" className="px-3 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Pengumuman & Agenda</a>
+                            <a href="#proker" className="px-3 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Program Kerja</a>
+                            <a href="#profil" className="px-3 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Profil & Visi Misi</a>
+                            <a href="#galeri" className="px-3 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition">Galeri</a>
                         </nav>
 
                         {/* Action CTA Button */}
@@ -368,6 +363,7 @@ export default function App() {
                         <div className="lg:hidden pt-4 pb-3 border-t border-slate-100 mt-3 space-y-1">
                             {[
                                 { href: '#home', label: 'Beranda' },
+                                { href: '#maba', label: '🎓 Sambutan Mahasiswa Baru 2026', highlight: true },
                                 { href: '#layanan', label: 'Layanan Mahasiswa' },
                                 { href: '#pengumuman', label: 'Pengumuman & Agenda' },
                                 { href: '#proker', label: 'Program Kerja' },
@@ -379,14 +375,14 @@ export default function App() {
                                     key={item.href}
                                     href={item.href}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50"
+                                    className={`block px-3 py-2 rounded-md text-base font-medium transition ${item.highlight ? 'bg-blue-50 text-blue-700 font-bold' : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'}`}
                                 >
                                     {item.label}
                                 </a>
                             ))}
                             <div className="pt-2">
                                 <a
-                                    href="https://wa.me/6283839976681"
+                                    href="https://wa.me/6289529812893"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="w-full text-center block py-2.5 px-4 bg-blue-600 text-white rounded-lg font-bold text-sm"
@@ -475,11 +471,11 @@ export default function App() {
                                 </div>
 
                                 {/* Logo & Titles */}
-                                <div className="w-28 h-28 mx-auto mb-4 rounded-full p-2 bg-gradient-to-tr from-amber-100 via-amber-50 to-orange-50 shadow-md border border-amber-200/80 flex items-center justify-center">
+                                <div className="w-28 h-28 mx-auto mb-3 flex items-center justify-center">
                                     <img
                                         src="/logo-kanagara.png"
                                         alt="Logo Kabinet Kanagara BEM UNWAHA"
-                                        className="w-full h-full object-contain drop-shadow-sm hover:scale-105 transition-transform duration-500"
+                                        className="w-full h-full object-contain logo-sun-spin"
                                     />
                                 </div>
                                 <h3 className="text-xl font-extrabold text-slate-900 leading-tight">
@@ -539,6 +535,237 @@ export default function App() {
                             </div>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            {/* SAMBUTAN RESMI MAHASISWA BARU UNWAHA 2026 (#maba) */}
+            <section id="maba" className="relative py-16 md:py-24 bg-gradient-to-b from-white via-blue-50/50 to-slate-50 border-b border-slate-200/80 overflow-hidden">
+                {/* Decorative background blurs & patterns */}
+                <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute bottom-0 left-10 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    
+                    {/* Section Header */}
+                    <div className="text-center max-w-3xl mx-auto mb-14">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-bold tracking-wide mb-3 shadow-xs">
+                            <Sparkles className="w-3.5 h-3.5 text-blue-600 animate-spin" style={{ animationDuration: '4s' }} />
+                            <span>PKKMB & Sambutan Resmi Mahasiswa Baru 2026</span>
+                            <span className="bg-blue-600 text-white text-[10px] px-2 py-0.2 rounded-full font-extrabold uppercase">#Garuda13</span>
+                        </div>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                            🎓 Selamat Datang <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-600">
+                                Mahasiswa Baru UNWAHA 2026
+                            </span>
+                        </h2>
+                        <p className="text-slate-600 text-sm sm:text-base mt-3 max-w-2xl mx-auto">
+                            Langkah baru, semangat baru, dan tekad bersama menjadi generasi mahasiswa yang aktif, inspiratif, dan berprestasi di Universitas KH. A. Wahab Hasbullah Jombang.
+                        </p>
+                    </div>
+
+                    {/* Main Welcoming Card Showcase */}
+                    <div className="bg-white/90 backdrop-blur-md rounded-3xl border border-slate-200/90 shadow-xl overflow-hidden p-6 sm:p-8 lg:p-10">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                            
+                            {/* Left Column: Official Welcome Narrative & Leadership */}
+                            <div className="lg:col-span-7 space-y-6">
+                                
+                                {/* Welcome Salutation Badge */}
+                                <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-50 via-indigo-50/50 to-blue-50 border border-blue-200/80 flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm font-bold text-lg">
+                                        👋
+                                    </div>
+                                    <div>
+                                        <div className="text-xs font-bold text-blue-600 uppercase tracking-wider">Sambutan Hangat BEM UNWAHA</div>
+                                        <div className="text-base sm:text-lg font-extrabold text-slate-900 leading-tight">
+                                            Halo, Mahasiswa Baru UNWAHA 2026! 💙🤍
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Text Paragraphs */}
+                                <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed">
+                                    <p>
+                                        Sebuah langkah baru telah dimulai. Perjalanan panjang menuju dunia perkuliahan kini resmi menjadi bagian dari cerita kalian. Dengan semangat baru, harapan baru, dan tekad untuk berkembang, mari bersama-sama menjadi generasi mahasiswa yang aktif, inspiratif, dan berprestasi.
+                                    </p>
+                                    <p>
+                                        Keluarga besar Universitas KH. A. Wahab Hasbullah dengan bangga menyambut kehadiran mahasiswa baru tahun akademik 2026. Kehadiran kalian membawa warna baru, energi baru, serta semangat baru untuk terus membangun kampus yang unggul dan berdaya saing.
+                                    </p>
+                                </div>
+
+                                {/* High-Impact Quote Callout */}
+                                <div className="p-5 rounded-2xl bg-gradient-to-br from-slate-900 to-blue-950 text-white shadow-md relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 p-4 opacity-10 font-serif text-6xl select-none">
+                                        &ldquo;
+                                    </div>
+                                    <p className="text-sm sm:text-base font-semibold text-blue-100 leading-relaxed italic relative z-10">
+                                        &ldquo;Selamat bergabung dan selamat menjadi bagian dari keluarga besar UNWAHA Jombang. Semoga langkah awal ini menjadi pintu menuju kesuksesan dan masa depan yang gemilang. 🚀🎓&rdquo;
+                                    </p>
+                                    <div className="mt-3 pt-3 border-t border-blue-800/80 flex items-center justify-between text-xs text-amber-300 font-medium">
+                                        <span>Salam hangat dari kami, untuk generasi baru UNWAHA 2026! 💙✨</span>
+                                    </div>
+                                </div>
+
+                                {/* Leadership Duo Card (Presma & Wapresma) */}
+                                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                                    <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">
+                                        Pimpinan Mahasiswa BEM UNWAHA 2025/2026
+                                    </div>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <div className="flex items-center gap-3 p-3 bg-white rounded-xl border border-slate-200/80 shadow-xs">
+                                            <div className="w-10 h-10 rounded-full bg-blue-600 text-white font-black text-sm flex items-center justify-center flex-shrink-0 shadow-sm">
+                                                RD
+                                            </div>
+                                            <div className="min-w-0">
+                                                <div className="text-xs font-bold text-slate-900 truncate">M. Ridho Danu Muslikhan, S.Pd.</div>
+                                                <div className="text-[11px] text-blue-600 font-semibold">Presiden Mahasiswa</div>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex items-center gap-3 p-3 bg-white rounded-xl border border-slate-200/80 shadow-xs">
+                                            <div className="w-10 h-10 rounded-full bg-purple-600 text-white font-black text-sm flex items-center justify-center flex-shrink-0 shadow-sm">
+                                                MF
+                                            </div>
+                                            <div className="min-w-0">
+                                                <div className="text-xs font-bold text-slate-900 truncate">M. Fais Febriansyah, S.E.</div>
+                                                <div className="text-[11px] text-purple-600 font-semibold">Wakil Presiden Mahasiswa</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Official Hashtags Bar with Click-to-Copy */}
+                                <div>
+                                    <div className="flex items-center justify-between text-xs text-slate-500 mb-2 font-medium">
+                                        <span>Tagar Resmi Mahasiswa Baru:</span>
+                                        <button
+                                            onClick={copyHashtags}
+                                            className="text-blue-600 hover:text-blue-700 font-bold inline-flex items-center gap-1 text-[11px]"
+                                        >
+                                            {copiedHashtag ? (
+                                                <>
+                                                    <Check className="w-3 h-3 text-emerald-600" />
+                                                    <span className="text-emerald-600">Tersalin!</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Copy className="w-3 h-3" />
+                                                    <span>Salin Tagar</span>
+                                                </>
+                                            )}
+                                        </button>
+                                    </div>
+                                    <div className="flex flex-wrap gap-2">
+                                        {[
+                                            { tag: '#Garuda13', color: 'bg-blue-50 text-blue-700 border-blue-200' },
+                                            { tag: '#PKKMBUNWAHA', color: 'bg-indigo-50 text-indigo-700 border-indigo-200' },
+                                            { tag: '#UNWAHA2026', color: 'bg-amber-50 text-amber-700 border-amber-200' },
+                                            { tag: '#unwahajombang', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
+                                        ].map((item) => (
+                                            <span
+                                                key={item.tag}
+                                                className={`text-xs px-3 py-1 rounded-lg border font-bold ${item.color} shadow-2xs`}
+                                            >
+                                                {item.tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* CTA Action Buttons */}
+                                <div className="flex flex-wrap items-center gap-3 pt-2">
+                                    <a
+                                        href="https://wa.me/6289529812893?text=Halo%20BEM%20UNWAHA,%20saya%20Mahasiswa%20Baru%202026%20ingin%20bergabung%20grup%20informasi:"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md hover:shadow-lg transition-all"
+                                    >
+                                        <MessageCircle className="w-4 h-4" />
+                                        <span>Helpdesk MABA via WhatsApp</span>
+                                    </a>
+                                    <a
+                                        href="https://unwaha.ac.id"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs border border-slate-200 shadow-2xs transition"
+                                    >
+                                        <span>Website Kampus unwaha.ac.id</span>
+                                        <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+                                    </a>
+                                    <a
+                                        href="https://www.instagram.com/unwahajombang"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-blue-500/10 hover:from-pink-500/20 hover:to-blue-500/20 text-slate-800 font-bold text-xs border border-purple-200/80 transition"
+                                    >
+                                        <Instagram className="w-4 h-4 text-pink-600" />
+                                        <span>@unwahajombang</span>
+                                    </a>
+                                </div>
+
+                            </div>
+
+                            {/* Right Column: Featured Poster Frame */}
+                            <div className="lg:col-span-5 flex flex-col items-center">
+                                <div className="relative group max-w-sm w-full">
+                                    
+                                    {/* Glowing gradient back-drop */}
+                                    <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 via-indigo-500 to-amber-500 rounded-3xl blur-md opacity-30 group-hover:opacity-60 transition duration-500" />
+                                    
+                                    {/* Poster Box */}
+                                    <div className="relative rounded-2xl overflow-hidden bg-white border-2 border-slate-200/80 shadow-2xl">
+                                        <img
+                                            src="/welcoming-maba-2026.png"
+                                            alt="Poster Resmi Selamat Datang Mahasiswa Baru UNWAHA 2026"
+                                            className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500 cursor-pointer"
+                                            onClick={() => setPosterModalOpen(true)}
+                                        />
+
+                                        {/* Overlay Hover Trigger */}
+                                        <div 
+                                            onClick={() => setPosterModalOpen(true)}
+                                            className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2 text-white cursor-pointer backdrop-blur-[2px]"
+                                        >
+                                            <button className="px-4 py-2 bg-white text-slate-900 rounded-xl font-bold text-xs flex items-center gap-2 shadow-lg hover:bg-blue-50 transition">
+                                                <Maximize2 className="w-4 h-4 text-blue-600" />
+                                                <span>Klik untuk Perbesar Poster</span>
+                                            </button>
+                                        </div>
+
+                                        {/* Ribbon corner badge */}
+                                        <div className="absolute top-3 left-3 bg-blue-600/90 backdrop-blur-sm text-white text-[10px] font-extrabold px-3 py-1 rounded-full shadow-md flex items-center gap-1.5 border border-white/20">
+                                            <Sparkle className="w-3 h-3 fill-amber-300 text-amber-300" />
+                                            <span>RILIS RESMI BEM 2026</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                {/* Interactive Mini-bar Below Poster */}
+                                <div className="w-full max-w-sm mt-4 grid grid-cols-2 gap-2 text-center text-xs">
+                                    <button
+                                        onClick={() => setPosterModalOpen(true)}
+                                        className="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center gap-1.5 border border-slate-200 transition"
+                                    >
+                                        <Maximize2 className="w-3.5 h-3.5 text-slate-600" />
+                                        <span>Lihat Poster</span>
+                                    </button>
+                                    <a
+                                        href="/welcoming-maba-2026.png"
+                                        download="Poster-Maba-UNWAHA-2026.png"
+                                        className="py-2.5 px-3 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold flex items-center justify-center gap-1.5 border border-blue-200 transition"
+                                    >
+                                        <Download className="w-3.5 h-3.5 text-blue-600" />
+                                        <span>Unduh Gambar</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
@@ -768,7 +995,7 @@ export default function App() {
                         {seminars.map((sem) => (
                             <div
                                 key={sem.id}
-                                className={`bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between border-l-4 ${sem.color}`}
+                                className={`portal-card p-6 flex flex-col justify-between border-l-4 ${sem.color}`}
                             >
                                 <div>
                                     <div className="flex items-center justify-between mb-3">
@@ -868,7 +1095,7 @@ export default function App() {
                             return (
                                 <div
                                     key={proker.id}
-                                    className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between"
+                                    className="portal-card p-6 flex flex-col justify-between"
                                 >
                                     <div>
                                         <div className="flex items-center justify-between mb-4">
@@ -923,12 +1150,12 @@ export default function App() {
                             
                             {/* Logo Showcase Left */}
                             <div className="lg:col-span-4 flex flex-col items-center text-center">
-                                <div className="relative p-6 rounded-3xl bg-white border border-amber-200/80 shadow-xl max-w-[280px] w-full">
-                                    <div className="w-48 h-48 mx-auto rounded-full bg-gradient-to-tr from-amber-100/70 via-amber-50/80 to-orange-50/50 p-3 flex items-center justify-center border border-amber-200/70 shadow-inner">
+                                <div className="relative p-6 rounded-3xl bg-white border border-amber-200/80 shadow-xl max-w-[280px] w-full flex flex-col items-center">
+                                    <div className="w-48 h-48 mx-auto flex items-center justify-center">
                                         <img
                                             src="/logo-kanagara.png"
                                             alt="Logo Bunga Matahari Emas - Kabinet Kanagara BEM UNWAHA"
-                                            className="w-full h-full object-contain drop-shadow-md hover:rotate-6 transition-transform duration-700"
+                                            className="w-full h-full object-contain logo-sun-spin"
                                         />
                                     </div>
                                     <div className="mt-4">
@@ -1084,7 +1311,7 @@ export default function App() {
                             {pengurusData.map((pengurus, idx) => (
                                 <div
                                     key={idx}
-                                    className="bg-white border border-slate-200 rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition"
+                                    className="portal-card p-6 text-center"
                                 >
                                     <div className={`w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center font-extrabold text-xl shadow-md ${pengurus.color}`}>
                                         {pengurus.initial}
@@ -1181,7 +1408,7 @@ export default function App() {
                                     { name: 'Instagram', handle: '@bemunwaha', icon: Instagram, href: 'https://www.instagram.com/bemunwaha', color: 'hover:bg-pink-600' },
                                     { name: 'YouTube', handle: 'BEM UNWAHA', icon: Youtube, href: 'https://youtube.com/@bemunwaha', color: 'hover:bg-red-600' },
                                     { name: 'TikTok', handle: '@official_bemunwaha', icon: Music, href: 'https://www.tiktok.com/@official_bemunwaha', color: 'hover:bg-slate-700' },
-                                    { name: 'WhatsApp', handle: 'Official Contact', icon: MessageCircle, href: 'https://wa.me/6283839976681', color: 'hover:bg-emerald-600' },
+                                    { name: 'WhatsApp', handle: 'Official Contact', icon: MessageCircle, href: 'https://wa.me/6289529812893', color: 'hover:bg-emerald-600' },
                                 ].map((soc, i) => {
                                     const Icon = soc.icon
                                     return (
@@ -1290,6 +1517,70 @@ export default function App() {
             >
                 <ArrowUpCircle className="w-5 h-5" />
             </button>
+
+            {/* Poster Lightbox Modal */}
+            {posterModalOpen && (
+                <div 
+                    className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 transition-all duration-300 animate-fadeIn"
+                    onClick={() => setPosterModalOpen(false)}
+                >
+                    <div 
+                        className="relative max-w-lg w-full bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-700 flex flex-col max-h-[90vh]"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {/* Modal Header */}
+                        <div className="flex items-center justify-between px-5 py-3.5 bg-slate-900 text-white border-b border-slate-800">
+                            <div className="flex items-center gap-2">
+                                <span className="bg-blue-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">
+                                    Poster Resmi
+                                </span>
+                                <span className="text-xs font-bold text-slate-200 truncate">
+                                    Mahasiswa Baru UNWAHA 2026
+                                </span>
+                            </div>
+                            <button
+                                onClick={() => setPosterModalOpen(false)}
+                                className="p-1 rounded-full text-slate-400 hover:text-white hover:bg-slate-800 transition"
+                                aria-label="Tutup modal"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+                        </div>
+
+                        {/* Modal Body Image */}
+                        <div className="overflow-y-auto p-4 flex justify-center bg-slate-950">
+                            <img
+                                src="/welcoming-maba-2026.png"
+                                alt="Poster Mahasiswa Baru UNWAHA 2026"
+                                className="w-full max-h-[72vh] object-contain rounded-xl shadow-lg"
+                            />
+                        </div>
+
+                        {/* Modal Footer Actions */}
+                        <div className="px-5 py-3 bg-slate-900 text-white flex flex-wrap items-center justify-between gap-3 border-t border-slate-800 text-xs">
+                            <div className="text-[11px] text-slate-400">
+                                © 2026 BEM Universitas KH. A. Wahab Hasbullah
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <a
+                                    href="/welcoming-maba-2026.png"
+                                    download="Poster-Maba-UNWAHA-2026.png"
+                                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl flex items-center gap-1.5 transition"
+                                >
+                                    <Download className="w-4 h-4" />
+                                    <span>Unduh Poster</span>
+                                </a>
+                                <button
+                                    onClick={() => setPosterModalOpen(false)}
+                                    className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-xl transition"
+                                >
+                                    Tutup
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
