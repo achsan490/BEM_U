@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Menu, X, GraduationCap, Compass, MessageCircle } from 'lucide-react'
+import { GraduationCap, Compass, MessageCircle, ChevronRight } from 'lucide-react'
 import { siteConfig } from '../data/bemData'
 
 export default function Navbar({ scrolled, onOpenAspirasi }) {
@@ -15,7 +15,7 @@ export default function Navbar({ scrolled, onOpenAspirasi }) {
             icon: GraduationCap 
         },
         { href: '#layanan', label: 'Layanan Mahasiswa' },
-        { href: '#pengumuman', label: 'Pengumuman & Agenda' },
+        { href: '#pengumuman', label: 'Dies Natalis & Agenda' },
         { href: '#proker', label: 'Program Kerja' },
         { href: '#profil', label: 'Profil & Visi Misi' },
         { href: '#galeri', label: 'Galeri' },
@@ -31,7 +31,7 @@ export default function Navbar({ scrolled, onOpenAspirasi }) {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between">
                     
-                    {/* Brand Logo & Name (Bunga Matahari murni tanpa lingkaran kuning) */}
+                    {/* Brand Logo & Name (Bunga Matahari murni tanpa lingkaran) */}
                     <a href="#home" className="flex items-center gap-3 group">
                         <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
                             <img
@@ -101,57 +101,78 @@ export default function Navbar({ scrolled, onOpenAspirasi }) {
                         </a>
                     </div>
 
-                    {/* Mobile Menu Toggle */}
+                    {/* Animated Hamburger Button Toggle */}
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="lg:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition"
+                        className="lg:hidden w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 flex flex-col items-center justify-center gap-1.5 p-2 transition-all relative focus:outline-none"
                         aria-label="Toggle Navigation Menu"
                     >
-                        {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                        <span 
+                            className={`w-5 h-0.5 bg-slate-800 rounded-full transition-all duration-300 ease-in-out ${
+                                mobileMenuOpen ? 'rotate-45 translate-y-2 bg-blue-600' : ''
+                            }`} 
+                        />
+                        <span 
+                            className={`w-5 h-0.5 bg-slate-800 rounded-full transition-all duration-200 ease-in-out ${
+                                mobileMenuOpen ? 'opacity-0 scale-0' : 'opacity-100'
+                            }`} 
+                        />
+                        <span 
+                            className={`w-5 h-0.5 bg-slate-800 rounded-full transition-all duration-300 ease-in-out ${
+                                mobileMenuOpen ? '-rotate-45 -translate-y-2 bg-blue-600' : ''
+                            }`} 
+                        />
                     </button>
                 </div>
 
-                {/* Mobile Dropdown Menu */}
+                {/* Animated Mobile Dropdown Menu Drawer */}
                 {mobileMenuOpen && (
-                    <div className="lg:hidden pt-4 pb-3 border-t border-slate-100 mt-3 space-y-1 animate-fade-in">
-                        {navLinks.map((item) => (
-                            <a
-                                key={item.href}
-                                href={item.href}
-                                onClick={() => setMobileMenuOpen(false)}
-                                className={`block px-3.5 py-2.5 rounded-xl text-sm font-semibold transition ${
-                                    item.isHighlight 
-                                        ? 'bg-blue-50 text-blue-700 font-bold flex items-center justify-between' 
-                                        : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'
-                                }`}
-                            >
-                                <span>{item.label}</span>
-                                {item.badge && (
-                                    <span className="bg-blue-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase">
-                                        {item.badge}
-                                    </span>
-                                )}
-                            </a>
-                        ))}
-                        
-                        <div className="pt-3 grid grid-cols-2 gap-2">
-                            <button
-                                onClick={() => {
-                                    setMobileMenuOpen(false)
-                                    onOpenAspirasi()
-                                }}
-                                className="w-full text-center py-2.5 px-3 bg-slate-100 text-slate-800 rounded-xl font-bold text-xs hover:bg-slate-200 transition"
-                            >
-                                Kotak Aspirasi
-                            </button>
-                            <a
-                                href={`https://wa.me/${siteConfig.contactWa}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-full text-center py-2.5 px-3 bg-blue-600 text-white rounded-xl font-bold text-xs hover:bg-blue-700 transition"
-                            >
-                                WhatsApp BEM
-                            </a>
+                    <div className="lg:hidden pt-4 pb-4 border-t border-slate-100 mt-3 animate-mobile-menu">
+                        <div className="bg-slate-50/90 backdrop-blur-md rounded-2xl p-3 border border-slate-200 shadow-lg space-y-1">
+                            {navLinks.map((item, idx) => (
+                                <a
+                                    key={item.href}
+                                    href={item.href}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    style={{ animationDelay: `${idx * 35}ms` }}
+                                    className={`animate-menu-item px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-between ${
+                                        item.isHighlight 
+                                            ? 'bg-blue-600 text-white shadow-xs' 
+                                            : 'text-slate-700 hover:text-blue-600 hover:bg-white active:scale-98'
+                                    }`}
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <span>{item.label}</span>
+                                        {item.badge && !item.isHighlight && (
+                                            <span className="bg-blue-600 text-white text-[9px] font-black px-1.5 py-0.2 rounded-full uppercase">
+                                                {item.badge}
+                                            </span>
+                                        )}
+                                    </div>
+                                    <ChevronRight className={`w-4 h-4 ${item.isHighlight ? 'text-white/80' : 'text-slate-400'}`} />
+                                </a>
+                            ))}
+                            
+                            <div className="pt-3 mt-2 border-t border-slate-200 grid grid-cols-2 gap-2">
+                                <button
+                                    onClick={() => {
+                                        setMobileMenuOpen(false)
+                                        onOpenAspirasi()
+                                    }}
+                                    className="w-full text-center py-2.5 px-3 bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 rounded-xl font-bold text-xs transition shadow-2xs active:scale-95"
+                                >
+                                    Kotak Aspirasi
+                                </button>
+                                <a
+                                    href={`https://wa.me/${siteConfig.contactWa}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full text-center py-2.5 px-3 bg-blue-600 text-white rounded-xl font-bold text-xs hover:bg-blue-700 transition shadow-2xs active:scale-95 flex items-center justify-center gap-1.5"
+                                >
+                                    <MessageCircle className="w-3.5 h-3.5" />
+                                    <span>WhatsApp</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 )}
