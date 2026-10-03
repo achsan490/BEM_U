@@ -14,8 +14,14 @@ export default function Navbar({ scrolled, onOpenAspirasi }) {
             isHighlight: true,
             icon: GraduationCap 
         },
-        { href: '#layanan', label: 'Layanan Mahasiswa' },
-        { href: '#pengumuman', label: 'Dies Natalis & Agenda' },
+        { 
+            href: '#wisuda', 
+            label: 'Wisuda 2026', 
+            badge: 'Soon',
+            isHighlight: true,
+            icon: GraduationCap 
+        },
+        { href: '#pengumuman', label: 'Agenda & Pengumuman' },
         { href: '#proker', label: 'Program Kerja' },
         { href: '#profil', label: 'Profil & Visi Misi' },
         { href: '#galeri', label: 'Galeri' },
